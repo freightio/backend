@@ -1,6 +1,6 @@
 # Variables
-SERVICE=helloworld
-IMG_HUB?=registry.test.com/test
+SERVICE=backend
+IMG_HUB?=registry.test.com/backend
 TAG?=latest
 # Version information
 VERSION=1.0.0
@@ -29,7 +29,7 @@ generate-go:
 	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/empty.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,\
-	plugins=grpc:../../../../ \
+	plugins=grpc:../../../ \
 	 $(shell pwd)/service/*.proto
 	@$(SED) -i '/google\/api/d' service/*.pb.go
 	@echo Generate successfully.

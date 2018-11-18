@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 
-package helloworld;
+package backend;
 
 // The greeting service definition.
 service Greeter {
