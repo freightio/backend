@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "google/api/annotations.proto";
+//import "google/api/annotations.proto";
 
 package backend;
 
@@ -8,16 +8,16 @@ package backend;
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {
-      option (google.api.http) = {
-          get: "/v2/hello/{name}"
-        };
+      // option (google.api.http) = {
+      //     get: "/v2/hello/{name}"
+      //   };
   }
 
   rpc SayBye (HelloRequest) returns (HelloReply) {
-      option (google.api.http) = {
-          put: "/v2/bye"
-          body: "*"
-      };
+      // option (google.api.http) = {
+      //     put: "/v2/bye"
+      //     body: "*"
+      // };
     }
 }
 

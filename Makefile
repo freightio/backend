@@ -34,6 +34,12 @@ generate-go:
 	@$(SED) -i '/google\/api/d' service/*.pb.go
 	@echo Generate successfully.
 
+generate-js:
+	@-mkdir $(shell pwd)/service/js > /dev/null 2>&1  || true
+	protoc -I./service service/*.proto \
+	--js_out=import_style=commonjs:service/js \
+	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/js
+
 build:prepare generate-go
 	go build -ldflags="$(LD_FLAGS)" -o bundles/$(SERVICE) internal/cmd/main.go
 
