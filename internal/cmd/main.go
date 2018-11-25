@@ -4,7 +4,6 @@ import (
 	"log"
 	"net"
 
-	_ "github.com/freightio/api-gateway/types"
 	impl "github.com/freightio/backend/internal/impl/service"
 	pb "github.com/freightio/backend/service"
 	"google.golang.org/grpc"
@@ -21,6 +20,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	pb.RegisterGreeterServer(s, &impl.Server{})
+	pb.RegisterOrdersServer(s, &impl.OrderServerImpl{})
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

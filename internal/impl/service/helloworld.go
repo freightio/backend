@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"time"
 
 	pb "github.com/freightio/backend/service"
 )
@@ -18,7 +19,7 @@ func (s *Server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	// if er != nil {
 	// 	return nil, err
 	// }
-	return &pb.HelloReply{Message: "Hello " + in.Name + "-" + "done"}, nil
+	return &pb.HelloReply{Message: "Hello " + in.Name + "-" + time.Now().String()}, nil
 }
 
 func (s *Server) SayBye(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+//import "google/api/annotations.proto";
+//import "google/protobuf/timestamp.proto";
+
+package backend;
+
+service Orders {
+  rpc Add (Order) returns (Order) {}
+  rpc Get (OrderRequest) returns (Order) {}
+  rpc Update (Order) returns (Order) {}
+  rpc List (Order) returns (OrderList) {}
+  rpc Delete (OrderRequest) returns (Order) {}
+}
+
+message Order {
+  string id = 1;
+  //contact person name
+  string name = 2;
+  string tel = 3;
+  //freight type
+  string type = 4;
+  string from = 5;
+  repeated string tos = 6;  
+  float fee = 7;
+  map<string,string> annotations = 8;
+  uint64 created = 9;
+}
+
+message OrderRequest {
+  string id = 1;
+}
+
+message OrderList {
+  repeated Order orders = 1;
+}
