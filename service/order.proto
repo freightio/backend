@@ -14,17 +14,26 @@ service Orders {
 }
 
 message Order {
-  string id = 1;
-  //contact person name
-  string name = 2;
-  string tel = 3;
+  string id = 1;  
   //freight type
-  string type = 4;
-  string from = 5;
-  repeated string tos = 6;  
-  float fee = 7;
-  map<string,string> annotations = 8;
-  uint64 created = 9;
+  string type = 2;
+  Position from = 3;
+  repeated Position tos = 4;
+  float fee = 5;
+  Contact contact = 6;
+  map<string,string> annotations = 7;
+  uint64 created = 8;
+}
+
+message Position {
+  string name = 1;
+  string location = 2;
+  string address = 3;
+}
+
+message Contact {
+  string name = 1;
+  string tel = 2;
 }
 
 message OrderRequest {
@@ -32,5 +41,5 @@ message OrderRequest {
 }
 
 message OrderList {
-  repeated Order orders = 1;
+  repeated Order items = 1;
 }

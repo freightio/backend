@@ -1,8 +1,11 @@
 import * as grpcWeb from 'grpc-web';
 import {
+  Contact,
   Order,
+  AnnotationsEntry,
   OrderList,
-  OrderRequest} from './order_pb';
+  OrderRequest,
+  Position} from './order_pb';
 
 export class OrdersClient {
   constructor (hostname: string,

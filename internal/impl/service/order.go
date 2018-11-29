@@ -16,6 +16,7 @@ type OrderServerImpl struct{}
 
 func (s *OrderServerImpl) Add(ctx context.Context, in *pb.Order) (*pb.Order, error) {
 	in.Id = time.Now().String()
+	//in.Created = time.Now().Unix()
 	if err := biz.Insert(tableName, in); err != nil {
 		return nil, err
 	}
@@ -42,7 +43,7 @@ func (s *OrderServerImpl) List(ctx context.Context, in *pb.Order) (*pb.OrderList
 	if err := biz.List(tableName, &orders); err != nil {
 		return nil, err
 	}
-	return &pb.OrderList{Orders: orders}, nil
+	return &pb.OrderList{Items: orders}, nil
 }
 
 func (s *OrderServerImpl) Delete(ctx context.Context, in *pb.OrderRequest) (*pb.Order, error) {
