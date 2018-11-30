@@ -34,6 +34,10 @@ export class Order {
   setAnnotationsList(a: Order.AnnotationsEntry[]): void;
   getCreated(): number;
   setCreated(a: number): void;
+  getDriverid(): string;
+  setDriverid(a: string): void;
+  getStatus(): string;
+  setStatus(a: string): void;
   toObject(): Order.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => Order;
@@ -49,6 +53,8 @@ export namespace Order {
     Contact: Contact;
     AnnotationsList: Order.AnnotationsEntry[];
     Created: number;
+    Driverid: string;
+    Status: string;
   }
   export type AnnotationsEntry = OrderAnnotationsEntry;
 }

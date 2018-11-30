@@ -78,7 +78,9 @@ proto.backend.Order.toObject = function(includeInstance, msg) {
     fee: +jspb.Message.getFieldWithDefault(msg, 5, 0.0),
     contact: (f = msg.getContact()) && proto.backend.Contact.toObject(includeInstance, f),
     annotationsMap: (f = msg.getAnnotationsMap()) ? f.toObject(includeInstance, undefined) : [],
-    created: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    created: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    driverid: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    status: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -151,6 +153,14 @@ proto.backend.Order.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setCreated(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDriverid(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStatus(value);
       break;
     default:
       reader.skipField();
@@ -234,6 +244,20 @@ proto.backend.Order.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint64(
       8,
+      f
+    );
+  }
+  f = message.getDriverid();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
+      f
+    );
+  }
+  f = message.getStatus();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
       f
     );
   }
@@ -406,6 +430,36 @@ proto.backend.Order.prototype.getCreated = function() {
 /** @param {number} value */
 proto.backend.Order.prototype.setCreated = function(value) {
   jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional string driverId = 9;
+ * @return {string}
+ */
+proto.backend.Order.prototype.getDriverid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/** @param {string} value */
+proto.backend.Order.prototype.setDriverid = function(value) {
+  jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional string status = 10;
+ * @return {string}
+ */
+proto.backend.Order.prototype.getStatus = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/** @param {string} value */
+proto.backend.Order.prototype.setStatus = function(value) {
+  jspb.Message.setProto3StringField(this, 10, value);
 };
 
 

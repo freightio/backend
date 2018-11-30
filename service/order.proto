@@ -23,6 +23,8 @@ message Order {
   Contact contact = 6;
   map<string,string> annotations = 7;
   uint64 created = 8;
+  string driverId = 9;
+  string status = 10;
 }
 
 message Position {

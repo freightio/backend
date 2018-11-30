@@ -39,6 +39,7 @@ generate-js:
 	protoc -I./service service/*.proto \
 	--js_out=import_style=commonjs:service/js \
 	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/js
+	cp -rf service/js/* ../ui/src/sdk
 
 build:prepare generate-go
 	go build -ldflags="$(LD_FLAGS)" -o bundles/$(SERVICE) internal/cmd/main.go
