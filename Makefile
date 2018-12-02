@@ -17,12 +17,15 @@ else
 endif
 
 prepare:
-	go install github.com/freightio/api-gateway/plugin/...
+#	go install github.com/freightio/api-gateway/plugin/...
+	go get github.com/gogo/protobuf/protoc-gen-gogofaster
+#	go get github.com/golang/protobuf/protoc-gen-go
+	@-docker swarm init > /dev/null 2>&1  || true
+	@-docker network create --driver=overlay devel > /dev/null 2>&1  || true
 
-generate-go:
-	@protoc -I${GOPATH}/src \
-	-I${GOPATH}/src/github.com/freightio/api-gateway/third_party \
-	--gogogo_out=\
+generate-go:prepare
+	@protoc -I${GOPATH}/src -I. \
+	--gogofaster_out=\
 	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\

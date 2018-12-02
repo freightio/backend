@@ -38,6 +38,8 @@ export class Order {
   setDriverid(a: string): void;
   getStatus(): string;
   setStatus(a: string): void;
+  getSender(): Contact;
+  setSender(a: Contact): void;
   toObject(): Order.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => Order;
@@ -55,6 +57,7 @@ export namespace Order {
     Created: number;
     Driverid: string;
     Status: string;
+    Sender: Contact;
   }
   export type AnnotationsEntry = OrderAnnotationsEntry;
 }

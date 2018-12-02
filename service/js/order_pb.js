@@ -80,7 +80,8 @@ proto.backend.Order.toObject = function(includeInstance, msg) {
     annotationsMap: (f = msg.getAnnotationsMap()) ? f.toObject(includeInstance, undefined) : [],
     created: jspb.Message.getFieldWithDefault(msg, 8, 0),
     driverid: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    status: jspb.Message.getFieldWithDefault(msg, 10, "")
+    status: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    sender: (f = msg.getSender()) && proto.backend.Contact.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -147,7 +148,7 @@ proto.backend.Order.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = msg.getAnnotationsMap();
       reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString);
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "");
          });
       break;
     case 8:
@@ -161,6 +162,11 @@ proto.backend.Order.deserializeBinaryFromReader = function(msg, reader) {
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setStatus(value);
+      break;
+    case 11:
+      var value = new proto.backend.Contact;
+      reader.readMessage(value,proto.backend.Contact.deserializeBinaryFromReader);
+      msg.setSender(value);
       break;
     default:
       reader.skipField();
@@ -261,6 +267,14 @@ proto.backend.Order.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getSender();
+  if (f != null) {
+    writer.writeMessage(
+      11,
+      f,
+      proto.backend.Contact.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -326,15 +340,15 @@ proto.backend.Order.prototype.hasFrom = function() {
 
 /**
  * repeated Position tos = 4;
- * @return {!Array.<!proto.backend.Position>}
+ * @return {!Array<!proto.backend.Position>}
  */
 proto.backend.Order.prototype.getTosList = function() {
-  return /** @type{!Array.<!proto.backend.Position>} */ (
+  return /** @type{!Array<!proto.backend.Position>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.backend.Position, 4));
 };
 
 
-/** @param {!Array.<!proto.backend.Position>} value */
+/** @param {!Array<!proto.backend.Position>} value */
 proto.backend.Order.prototype.setTosList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
@@ -460,6 +474,36 @@ proto.backend.Order.prototype.getStatus = function() {
 /** @param {string} value */
 proto.backend.Order.prototype.setStatus = function(value) {
   jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional Contact sender = 11;
+ * @return {?proto.backend.Contact}
+ */
+proto.backend.Order.prototype.getSender = function() {
+  return /** @type{?proto.backend.Contact} */ (
+    jspb.Message.getWrapperField(this, proto.backend.Contact, 11));
+};
+
+
+/** @param {?proto.backend.Contact|undefined} value */
+proto.backend.Order.prototype.setSender = function(value) {
+  jspb.Message.setWrapperField(this, 11, value);
+};
+
+
+proto.backend.Order.prototype.clearSender = function() {
+  this.setSender(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.backend.Order.prototype.hasSender = function() {
+  return jspb.Message.getField(this, 11) != null;
 };
 
 
@@ -1109,15 +1153,15 @@ proto.backend.OrderList.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * repeated Order items = 1;
- * @return {!Array.<!proto.backend.Order>}
+ * @return {!Array<!proto.backend.Order>}
  */
 proto.backend.OrderList.prototype.getItemsList = function() {
-  return /** @type{!Array.<!proto.backend.Order>} */ (
+  return /** @type{!Array<!proto.backend.Order>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.backend.Order, 1));
 };
 
 
-/** @param {!Array.<!proto.backend.Order>} value */
+/** @param {!Array<!proto.backend.Order>} value */
 proto.backend.OrderList.prototype.setItemsList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };

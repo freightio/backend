@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+//import "google/api/annotations.proto";
+//import "google/protobuf/timestamp.proto";
+
+package backend;
+
+service Users {
+  rpc Add (User) returns (User) {}
+  rpc Get (UserRequest) returns (User) {}
+  rpc Update (User) returns (User) {}
+  rpc List (User) returns (UserList) {}
+  rpc Delete (UserRequest) returns (User) {}
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string tel = 3;
+  uint64 created = 4;
+  map<string,string> annotations = 5;  
+}
+
+message UserRequest {
+  string id = 1;
+}
+
+message UserList {
+  repeated User items = 1;
+}
