@@ -115,7 +115,7 @@ proto.backend.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTel(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setCreated(value);
       break;
     case 5:
@@ -176,7 +176,7 @@ proto.backend.User.serializeBinaryToWriter = function(message, writer) {
   }
   f = message.getCreated();
   if (f !== 0) {
-    writer.writeUint64(
+    writer.writeInt64(
       4,
       f
     );
@@ -234,7 +234,7 @@ proto.backend.User.prototype.setTel = function(value) {
 
 
 /**
- * optional uint64 created = 4;
+ * optional int64 created = 4;
  * @return {number}
  */
 proto.backend.User.prototype.getCreated = function() {

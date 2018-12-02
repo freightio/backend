@@ -1,21 +1,3 @@
-export class Contact {
-  constructor ();
-  getName(): string;
-  setName(a: string): void;
-  getTel(): string;
-  setTel(a: string): void;
-  toObject(): Contact.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Contact;
-}
-
-export namespace Contact {
-  export type AsObject = {
-    Name: string;
-    Tel: string;
-  }
-}
-
 export class Order {
   constructor ();
   getId(): string;
@@ -28,8 +10,8 @@ export class Order {
   setTosList(a: Position[]): void;
   getFee(): number;
   setFee(a: number): void;
-  getContact(): Contact;
-  setContact(a: Contact): void;
+  getSender(): Sender;
+  setSender(a: Sender): void;
   getAnnotationsList(): Order.AnnotationsEntry[];
   setAnnotationsList(a: Order.AnnotationsEntry[]): void;
   getCreated(): number;
@@ -38,8 +20,6 @@ export class Order {
   setDriverid(a: string): void;
   getStatus(): string;
   setStatus(a: string): void;
-  getSender(): Contact;
-  setSender(a: Contact): void;
   toObject(): Order.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => Order;
@@ -52,12 +32,11 @@ export namespace Order {
     From: Position;
     TosList: Position[];
     Fee: number;
-    Contact: Contact;
+    Sender: Sender;
     AnnotationsList: Order.AnnotationsEntry[];
     Created: number;
     Driverid: string;
     Status: string;
-    Sender: Contact;
   }
   export type AnnotationsEntry = OrderAnnotationsEntry;
 }
@@ -146,6 +125,27 @@ export namespace Position {
     Name: string;
     Location: string;
     Address: string;
+  }
+}
+
+export class Sender {
+  constructor ();
+  getId(): string;
+  setId(a: string): void;
+  getName(): string;
+  setName(a: string): void;
+  getTel(): string;
+  setTel(a: string): void;
+  toObject(): Sender.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => Sender;
+}
+
+export namespace Sender {
+  export type AsObject = {
+    Id: string;
+    Name: string;
+    Tel: string;
   }
 }
 

@@ -9,7 +9,7 @@ service Orders {
   rpc Add (Order) returns (Order) {}
   rpc Get (OrderRequest) returns (Order) {}
   rpc Update (Order) returns (Order) {}
-  rpc List (Order) returns (OrderList) {}
+  rpc List (Position) returns (OrderList) {}
   rpc Delete (OrderRequest) returns (Order) {}
 }
 
@@ -20,9 +20,9 @@ message Order {
   Position from = 3;
   repeated Position tos = 4;
   float fee = 5;
-  Contact contact = 6;
+  Sender sender = 6;
   map<string,string> annotations = 7;
-  uint64 created = 8;
+  int64 created = 8;
   string driverId = 9;
   string status = 10;
 }
@@ -33,9 +33,10 @@ message Position {
   string address = 3;
 }
 
-message Contact {
-  string name = 1;
-  string tel = 2;
+message Sender {
+  string id = 1;
+  string name = 2;
+  string tel = 3;
 }
 
 message OrderRequest {

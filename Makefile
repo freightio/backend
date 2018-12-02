@@ -45,7 +45,7 @@ generate-js:
 	cp -rf service/js/* ../ui/src/sdk
 
 build:prepare generate-go
-	go build -ldflags="$(LD_FLAGS)" -o bundles/$(SERVICE) internal/cmd/main.go
+	go build -ldflags='-linkmode external -extldflags -static $(LD_FLAGS)' -o bundles/$(SERVICE) internal/cmd/main.go
 
 image:build
 	docker build -t $(IMG_HUB)/$(SERVICE):$(TAG) .
@@ -53,6 +53,13 @@ image:build
 run:image
 	@-docker service rm $(SERVICE) > /dev/null 2>&1  || true	
 	@docker service create --name $(SERVICE) --network devel $(IMG_HUB)/$(SERVICE):$(TAG)
+
+envoy:
+	docker build -t envoy-freight:latest -f envoy.Dockerfile .
+	docker service create --name envoy --network devel -p 8080:8080 envoy-freight:latest
+
+mysql:
+	-docker service create --name mysql --network devel -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=freight mysql:5.7.24
 
 test:
 	go test -cover ./...

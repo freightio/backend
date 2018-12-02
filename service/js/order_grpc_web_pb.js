@@ -243,12 +243,12 @@ proto.backend.OrdersPromiseClient.prototype.update =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.backend.Order,
+ *   !proto.backend.Position,
  *   !proto.backend.OrderList>}
  */
 const methodInfo_Orders_List = new grpc.web.AbstractClientBase.MethodInfo(
   proto.backend.OrderList,
-  /** @param {!proto.backend.Order} request */
+  /** @param {!proto.backend.Position} request */
   function(request) {
     return request.serializeBinary();
   },
@@ -257,7 +257,7 @@ const methodInfo_Orders_List = new grpc.web.AbstractClientBase.MethodInfo(
 
 
 /**
- * @param {!proto.backend.Order} request The
+ * @param {!proto.backend.Position} request The
  *     request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
@@ -278,7 +278,7 @@ proto.backend.OrdersClient.prototype.list =
 
 
 /**
- * @param {!proto.backend.Order} request The
+ * @param {!proto.backend.Position} request The
  *     request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata

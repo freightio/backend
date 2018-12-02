@@ -1,11 +1,11 @@
 import * as grpcWeb from 'grpc-web';
 import {
-  Contact,
   Order,
   AnnotationsEntry,
   OrderList,
   OrderRequest,
-  Position} from './order_pb';
+  Position,
+  Sender} from './order_pb';
 
 export class OrdersClient {
   constructor (hostname: string,
@@ -34,7 +34,7 @@ export class OrdersClient {
   ): grpcWeb.ClientReadableStream<Order>;
 
   list(
-    request: Order,
+    request: Position,
     metadata: grpcWeb.Metadata,
     callback: (err: grpcWeb.Error,
                response: OrderList) => void
@@ -70,7 +70,7 @@ export class OrdersPromiseClient {
   ): Promise<Order>;
 
   list(
-    request: Order,
+    request: Position,
     metadata: grpcWeb.Metadata
   ): Promise<OrderList>;
 
