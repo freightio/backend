@@ -1,6 +1,6 @@
 # Variables
 SERVICE=backend
-IMG_HUB?=registry.test.com/backend
+IMG_HUB?=docker.io/jmzwcn
 TAG?=latest
 # Version information
 VERSION=1.0.0
@@ -50,6 +50,9 @@ build:prepare generate-go
 image:build
 	docker build -t $(IMG_HUB)/$(SERVICE):$(TAG) .
 
+push:image
+	docker push $(IMG_HUB)/$(SERVICE):$(TAG)
+
 run:image
 	@-docker service rm $(SERVICE) > /dev/null 2>&1  || true	
 	@docker service create --name $(SERVICE) --network devel $(IMG_HUB)/$(SERVICE):$(TAG)
@@ -59,7 +62,7 @@ envoy:
 	docker service create --name envoy --network devel -p 8080:8080 envoy-freight:latest
 
 mysql:
-	-docker service create --name mysql --network devel -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=freight mysql:5.7.24
+	-docker service create --name mysql --network devel --mount type=bind,source=/home/daniel/.mysqldata,destination=/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=freight mysql:5.7.24
 
 test:
 	go test -cover ./...

@@ -33,7 +33,12 @@ func (s *OrderServerImpl) Get(ctx context.Context, in *pb.OrderRequest) (*pb.Ord
 }
 
 func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, error) {
-	if err := biz.Update(tableName, in.Id, in); err != nil {
+	order, err := s.Get(ctx, &pb.OrderRequest{Id: in.Id})
+	if err != nil {
+		return nil, err
+	}
+	order.Status = in.Status
+	if err := biz.Update(tableName, in.Id, order); err != nil {
 		return nil, err
 	}
 	return in, nil
