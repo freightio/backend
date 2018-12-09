@@ -2,12 +2,14 @@ export class User {
   constructor ();
   getId(): string;
   setId(a: string): void;
-  getName(): string;
-  setName(a: string): void;
   getTel(): string;
   setTel(a: string): void;
+  getName(): string;
+  setName(a: string): void;
   getCreated(): number;
   setCreated(a: number): void;
+  getSign(): string;
+  setSign(a: string): void;
   getAnnotationsList(): User.AnnotationsEntry[];
   setAnnotationsList(a: User.AnnotationsEntry[]): void;
   toObject(): User.AsObject;
@@ -18,9 +20,10 @@ export class User {
 export namespace User {
   export type AsObject = {
     Id: string;
-    Name: string;
     Tel: string;
+    Name: string;
     Created: number;
+    Sign: string;
     AnnotationsList: User.AnnotationsEntry[];
   }
   export type AnnotationsEntry = UserAnnotationsEntry;

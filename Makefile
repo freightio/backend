@@ -43,7 +43,7 @@ generate-js:
 	--js_out=import_style=commonjs:service/js \
 	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/js
 	cp -rf service/js/* ../ui/src/sdk
-
+	@echo Generate successfully.
 build:prepare generate-go
 	go build -ldflags='-linkmode external -extldflags -static $(LD_FLAGS)' -o bundles/$(SERVICE) internal/cmd/main.go
 
@@ -58,8 +58,8 @@ run:image
 	@docker service create --name $(SERVICE) --network devel $(IMG_HUB)/$(SERVICE):$(TAG)
 
 envoy:
-	docker build -t envoy-freight:latest -f envoy.Dockerfile .
-	docker service create --name envoy --network devel -p 8080:8080 envoy-freight:latest
+	docker build -t $(IMG_HUB)/envoy:latest -f envoy.Dockerfile .
+	docker service create --name envoy --network devel -p 8080:8080 $(IMG_HUB)/envoy:latest
 
 mysql:
 	-docker service create --name mysql --network devel --mount type=bind,source=/home/daniel/.mysqldata,destination=/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=freight mysql:5.7.24

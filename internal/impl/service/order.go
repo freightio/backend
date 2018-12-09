@@ -10,15 +10,14 @@ import (
 )
 
 const (
-	tableName = "orders"
+	orderTable = "orders"
 )
 
 type OrderServerImpl struct{}
 
 func (s *OrderServerImpl) Add(ctx context.Context, in *pb.Order) (*pb.Order, error) {
 	in.Id = time.Now().String()
-	in.Created = time.Now().Unix() * 1000
-	if err := biz.Insert(tableName, in); err != nil {
+	if err := biz.Insert(orderTable, in); err != nil {
 		return nil, err
 	}
 	return in, nil
@@ -26,7 +25,7 @@ func (s *OrderServerImpl) Add(ctx context.Context, in *pb.Order) (*pb.Order, err
 
 func (s *OrderServerImpl) Get(ctx context.Context, in *pb.OrderRequest) (*pb.Order, error) {
 	order := pb.Order{}
-	if err := biz.GetById(tableName, in.Id, &order); err != nil {
+	if err := biz.GetById(orderTable, in.Id, &order); err != nil {
 		return nil, err
 	}
 	return &order, nil
@@ -38,7 +37,7 @@ func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, 
 		return nil, err
 	}
 	order.Status = in.Status
-	if err := biz.Update(tableName, in.Id, order); err != nil {
+	if err := biz.Update(orderTable, in.Id, order); err != nil {
 		return nil, err
 	}
 	return in, nil
@@ -46,7 +45,7 @@ func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, 
 
 func (s *OrderServerImpl) List(ctx context.Context, in *pb.Position) (*pb.OrderList, error) {
 	allOrders := []*pb.Order{}
-	if err := biz.List(tableName, &allOrders, "order by data->'$.created' desc"); err != nil {
+	if err := biz.List(orderTable, &allOrders, "order by data->'$.created' desc"); err != nil {
 		return nil, err
 	}
 	orders := []*pb.Order{}
@@ -65,7 +64,7 @@ func (s *OrderServerImpl) List(ctx context.Context, in *pb.Position) (*pb.OrderL
 }
 
 func (s *OrderServerImpl) Delete(ctx context.Context, in *pb.OrderRequest) (*pb.Order, error) {
-	if err := biz.Delete(tableName, in.Id); err != nil {
+	if err := biz.Delete(orderTable, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Order{}, nil

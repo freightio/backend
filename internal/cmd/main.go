@@ -21,6 +21,8 @@ func main() {
 	s := grpc.NewServer()
 	pb.RegisterGreeterServer(s, &impl.Server{})
 	pb.RegisterOrdersServer(s, &impl.OrderServerImpl{})
+	pb.RegisterUsersServer(s, &impl.UserServerImpl{})
+
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
