@@ -15,11 +15,12 @@ service Users {
 
 message User {
   string id = 1;
-  string tel = 2;
-  string name = 3;
-  int64 created = 4;
-  string sign = 5;
-  map<string,string> annotations = 6;  
+  string name = 2;
+  string password = 3;
+  string tel = 4;
+  int64 created = 5;
+  string sign = 6;
+  map<string,string> annotations = 7;  
 }
 
 message UserRequest {

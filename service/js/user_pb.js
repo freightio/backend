@@ -62,10 +62,11 @@ proto.backend.User.prototype.toObject = function(opt_includeInstance) {
 proto.backend.User.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    tel: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    created: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    sign: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    tel: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    created: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    sign: jspb.Message.getFieldWithDefault(msg, 6, ""),
     annotationsMap: (f = msg.getAnnotationsMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
@@ -109,21 +110,25 @@ proto.backend.User.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTel(value);
+      msg.setName(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setPassword(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTel(value);
+      break;
+    case 5:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCreated(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setSign(value);
       break;
-    case 6:
+    case 7:
       var value = msg.getAnnotationsMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "");
@@ -165,37 +170,44 @@ proto.backend.User.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTel();
+  f = message.getName();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getName();
+  f = message.getPassword();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
+  f = message.getTel();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getCreated();
   if (f !== 0) {
     writer.writeInt64(
-      4,
+      5,
       f
     );
   }
   f = message.getSign();
   if (f.length > 0) {
     writer.writeString(
-      5,
+      6,
       f
     );
   }
   f = message.getAnnotationsMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(6, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
+    f.serializeBinary(7, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
   }
 };
 
@@ -216,74 +228,89 @@ proto.backend.User.prototype.setId = function(value) {
 
 
 /**
- * optional string tel = 2;
+ * optional string name = 2;
  * @return {string}
  */
-proto.backend.User.prototype.getTel = function() {
+proto.backend.User.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.backend.User.prototype.setTel = function(value) {
+proto.backend.User.prototype.setName = function(value) {
   jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string name = 3;
+ * optional string password = 3;
  * @return {string}
  */
-proto.backend.User.prototype.getName = function() {
+proto.backend.User.prototype.getPassword = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /** @param {string} value */
-proto.backend.User.prototype.setName = function(value) {
+proto.backend.User.prototype.setPassword = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional int64 created = 4;
+ * optional string tel = 4;
+ * @return {string}
+ */
+proto.backend.User.prototype.getTel = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.backend.User.prototype.setTel = function(value) {
+  jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional int64 created = 5;
  * @return {number}
  */
 proto.backend.User.prototype.getCreated = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
 /** @param {number} value */
 proto.backend.User.prototype.setCreated = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional string sign = 5;
+ * optional string sign = 6;
  * @return {string}
  */
 proto.backend.User.prototype.getSign = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /** @param {string} value */
 proto.backend.User.prototype.setSign = function(value) {
-  jspb.Message.setProto3StringField(this, 5, value);
+  jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * map<string, string> annotations = 6;
+ * map<string, string> annotations = 7;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,string>}
  */
 proto.backend.User.prototype.getAnnotationsMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,string>} */ (
-      jspb.Message.getMapField(this, 6, opt_noLazyCreate,
+      jspb.Message.getMapField(this, 7, opt_noLazyCreate,
       null));
 };
 
