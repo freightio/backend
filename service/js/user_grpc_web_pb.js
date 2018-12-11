@@ -352,5 +352,117 @@ proto.backend.UsersPromiseClient.prototype.delete =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.backend.User,
+ *   !proto.backend.User>}
+ */
+const methodInfo_Users_Login = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.User,
+  /** @param {!proto.backend.User} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.backend.User.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.backend.User} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.backend.User)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.User>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.UsersClient.prototype.login =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/backend.Users/Login',
+      request,
+      metadata,
+      methodInfo_Users_Login,
+      callback);
+};
+
+
+/**
+ * @param {!proto.backend.User} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.backend.User>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.UsersPromiseClient.prototype.login =
+    function(request, metadata) {
+  return new Promise((resolve, reject) => {
+    this.delegateClient_.login(
+      request, metadata, (error, response) => {
+        error ? reject(error) : resolve(response);
+      });
+  });
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.backend.User,
+ *   !proto.backend.User>}
+ */
+const methodInfo_Users_Sign = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.User,
+  /** @param {!proto.backend.User} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.backend.User.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.backend.User} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.backend.User)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.User>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.UsersClient.prototype.sign =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/backend.Users/Sign',
+      request,
+      metadata,
+      methodInfo_Users_Sign,
+      callback);
+};
+
+
+/**
+ * @param {!proto.backend.User} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.backend.User>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.UsersPromiseClient.prototype.sign =
+    function(request, metadata) {
+  return new Promise((resolve, reject) => {
+    this.delegateClient_.sign(
+      request, metadata, (error, response) => {
+        error ? reject(error) : resolve(response);
+      });
+  });
+};
+
+
 module.exports = proto.backend;
 

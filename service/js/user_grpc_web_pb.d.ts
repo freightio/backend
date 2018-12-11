@@ -45,6 +45,20 @@ export class UsersClient {
                response: User) => void
   ): grpcWeb.ClientReadableStream<User>;
 
+  login(
+    request: User,
+    metadata: grpcWeb.Metadata,
+    callback: (err: grpcWeb.Error,
+               response: User) => void
+  ): grpcWeb.ClientReadableStream<User>;
+
+  sign(
+    request: User,
+    metadata: grpcWeb.Metadata,
+    callback: (err: grpcWeb.Error,
+               response: User) => void
+  ): grpcWeb.ClientReadableStream<User>;
+
 }
 
 export class UsersPromiseClient {
@@ -74,6 +88,16 @@ export class UsersPromiseClient {
 
   delete(
     request: UserRequest,
+    metadata: grpcWeb.Metadata
+  ): Promise<User>;
+
+  login(
+    request: User,
+    metadata: grpcWeb.Metadata
+  ): Promise<User>;
+
+  sign(
+    request: User,
     metadata: grpcWeb.Metadata
   ): Promise<User>;
 

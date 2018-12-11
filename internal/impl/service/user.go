@@ -51,3 +51,22 @@ func (s *UserServerImpl) Delete(ctx context.Context, in *pb.UserRequest) (*pb.Us
 	}
 	return &pb.User{}, nil
 }
+
+func (s *UserServerImpl) Login(ctx context.Context, in *pb.User) (*pb.User, error) {
+	user := pb.User{}
+	err := biz.Get(userTable, map[string]interface{}{"$.tel": in.Tel, "$.password": in.Password}, &user)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
+func (s *UserServerImpl) Sign(ctx context.Context, in *pb.User) (*pb.User, error) {
+	user := pb.User{}
+	err := biz.Get(userTable, map[string]interface{}{"$.tel": in.Tel}, &user)
+	if err != nil {
+		return nil, err
+	}
+	user.Sign = in.Sign
+	return s.Update(ctx, &user)
+}

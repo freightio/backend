@@ -11,6 +11,8 @@ service Users {
   rpc Update (User) returns (User) {}
   rpc List (User) returns (UserList) {}
   rpc Delete (UserRequest) returns (User) {}
+  rpc Login (User) returns (User) {}
+  rpc Sign (User) returns (User) {}
 }
 
 message User {
