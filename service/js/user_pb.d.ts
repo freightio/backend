@@ -12,8 +12,6 @@ export class User {
   setCreated(a: number): void;
   getSign(): string;
   setSign(a: string): void;
-  getAnnotationsList(): User.AnnotationsEntry[];
-  setAnnotationsList(a: User.AnnotationsEntry[]): void;
   toObject(): User.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => User;
@@ -27,44 +25,6 @@ export namespace User {
     Tel: string;
     Created: number;
     Sign: string;
-    AnnotationsList: User.AnnotationsEntry[];
-  }
-  export type AnnotationsEntry = UserAnnotationsEntry;
-}
-
-export class UserAnnotationsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): UserAnnotationsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => UserAnnotationsEntry;
-}
-
-export namespace UserAnnotationsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
-  }
-}
-
-export class AnnotationsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): AnnotationsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => AnnotationsEntry;
-}
-
-export namespace AnnotationsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
   }
 }
 

@@ -20,6 +20,10 @@ export class Order {
   setDriverid(a: string): void;
   getStatus(): string;
   setStatus(a: string): void;
+  getComment(): string;
+  setComment(a: string): void;
+  getPayinfo(): PayInfo;
+  setPayinfo(a: PayInfo): void;
   toObject(): Order.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => Order;
@@ -37,6 +41,8 @@ export namespace Order {
     Created: number;
     Driverid: string;
     Status: string;
+    Comment: string;
+    Payinfo: PayInfo;
   }
   export type AnnotationsEntry = OrderAnnotationsEntry;
 }
@@ -107,6 +113,24 @@ export namespace OrderRequest {
   }
 }
 
+export class PayInfo {
+  constructor ();
+  getType(): string;
+  setType(a: string): void;
+  getPayresult(): string;
+  setPayresult(a: string): void;
+  toObject(): PayInfo.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => PayInfo;
+}
+
+export namespace PayInfo {
+  export type AsObject = {
+    Type: string;
+    Payresult: string;
+  }
+}
+
 export class Position {
   constructor ();
   getName(): string;
@@ -146,6 +170,51 @@ export namespace Sender {
     Id: string;
     Name: string;
     Tel: string;
+  }
+}
+
+export class SignReply {
+  constructor ();
+  getSigned(): string;
+  setSigned(a: string): void;
+  toObject(): SignReply.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => SignReply;
+}
+
+export namespace SignReply {
+  export type AsObject = {
+    Signed: string;
+  }
+}
+
+export class User {
+  constructor ();
+  getId(): string;
+  setId(a: string): void;
+  getName(): string;
+  setName(a: string): void;
+  getPassword(): string;
+  setPassword(a: string): void;
+  getTel(): string;
+  setTel(a: string): void;
+  getCreated(): number;
+  setCreated(a: number): void;
+  getSign(): string;
+  setSign(a: string): void;
+  toObject(): User.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => User;
+}
+
+export namespace User {
+  export type AsObject = {
+    Id: string;
+    Name: string;
+    Password: string;
+    Tel: string;
+    Created: number;
+    Sign: string;
   }
 }
 

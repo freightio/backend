@@ -1,7 +1,6 @@
 import * as grpcWeb from 'grpc-web';
 import {
   User,
-  AnnotationsEntry,
   UserList,
   UserRequest} from './user_pb';
 

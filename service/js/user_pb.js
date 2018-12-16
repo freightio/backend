@@ -66,8 +66,7 @@ proto.backend.User.toObject = function(includeInstance, msg) {
     password: jspb.Message.getFieldWithDefault(msg, 3, ""),
     tel: jspb.Message.getFieldWithDefault(msg, 4, ""),
     created: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    sign: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    annotationsMap: (f = msg.getAnnotationsMap()) ? f.toObject(includeInstance, undefined) : []
+    sign: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -127,12 +126,6 @@ proto.backend.User.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setSign(value);
-      break;
-    case 7:
-      var value = msg.getAnnotationsMap();
-      reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "");
-         });
       break;
     default:
       reader.skipField();
@@ -204,10 +197,6 @@ proto.backend.User.serializeBinaryToWriter = function(message, writer) {
       6,
       f
     );
-  }
-  f = message.getAnnotationsMap(true);
-  if (f && f.getLength() > 0) {
-    f.serializeBinary(7, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
   }
 };
 
@@ -299,24 +288,6 @@ proto.backend.User.prototype.getSign = function() {
 /** @param {string} value */
 proto.backend.User.prototype.setSign = function(value) {
   jspb.Message.setProto3StringField(this, 6, value);
-};
-
-
-/**
- * map<string, string> annotations = 7;
- * @param {boolean=} opt_noLazyCreate Do not create the map if
- * empty, instead returning `undefined`
- * @return {!jspb.Map<string,string>}
- */
-proto.backend.User.prototype.getAnnotationsMap = function(opt_noLazyCreate) {
-  return /** @type {!jspb.Map<string,string>} */ (
-      jspb.Message.getMapField(this, 7, opt_noLazyCreate,
-      null));
-};
-
-
-proto.backend.User.prototype.clearAnnotationsMap = function() {
-  this.getAnnotationsMap().clear();
 };
 
 

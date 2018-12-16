@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"time"
 
 	"github.com/freightio/backend/internal/impl/biz"
 	pb "github.com/freightio/backend/service"
@@ -15,7 +14,7 @@ const (
 type UserServerImpl struct{}
 
 func (s *UserServerImpl) Add(ctx context.Context, in *pb.User) (*pb.User, error) {
-	in.Id = time.Now().String()
+	in.Id = in.Tel //time.Now().String()
 	if err := biz.Insert(userTable, in); err != nil {
 		return nil, err
 	}

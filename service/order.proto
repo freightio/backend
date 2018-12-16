@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "user.proto";
 //import "google/api/annotations.proto";
 //import "google/protobuf/timestamp.proto";
 
@@ -9,8 +10,11 @@ service Orders {
   rpc Add (Order) returns (Order) {}
   rpc Get (OrderRequest) returns (Order) {}
   rpc Update (Order) returns (Order) {}
-  rpc List (Position) returns (OrderList) {}
+  rpc ListByPositon (Position) returns (OrderList) {}
+  rpc ListByUser (User) returns (OrderList) {}
   rpc Delete (OrderRequest) returns (Order) {}
+  //fee required
+  rpc SignAlipay (Order) returns (SignReply) {}
 }
 
 message Order {
@@ -25,6 +29,8 @@ message Order {
   int64 created = 8;
   string driverId = 9;
   string status = 10;
+  string comment = 11;
+  PayInfo payInfo = 12;
 }
 
 message Position {
@@ -45,4 +51,14 @@ message OrderRequest {
 
 message OrderList {
   repeated Order items = 1;
+}
+
+message SignReply {
+  string signed = 1;
+}
+
+message PayInfo {
+  //alipay|weixin
+  string type = 1;
+  string payResult = 2;
 }

@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"log"
 	"strings"
 	"time"
 
@@ -43,9 +44,10 @@ func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, 
 	return in, nil
 }
 
-func (s *OrderServerImpl) List(ctx context.Context, in *pb.Position) (*pb.OrderList, error) {
+func (s *OrderServerImpl) ListByPositon(ctx context.Context, in *pb.Position) (*pb.OrderList, error) {
+	log.Println("here ", in)
 	allOrders := []*pb.Order{}
-	if err := biz.List(orderTable, &allOrders, "order by data->'$.created' desc"); err != nil {
+	if err := biz.List(orderTable, &allOrders, "where data->'$.status'<>'accept' or data->'$.status' is null order by data->'$.created' desc"); err != nil {
 		return nil, err
 	}
 	orders := []*pb.Order{}
@@ -63,9 +65,25 @@ func (s *OrderServerImpl) List(ctx context.Context, in *pb.Position) (*pb.OrderL
 	return &pb.OrderList{Items: orders}, nil
 }
 
+func (s *OrderServerImpl) ListByUser(ctx context.Context, in *pb.User) (*pb.OrderList, error) {
+	orders := []*pb.Order{}
+	if err := biz.List(orderTable, &orders, "where data->'$.sender.tel'='"+in.Tel+"' or data->'$.driverId'='"+in.Tel+"' order by data->'$.created' desc"); err != nil {
+		return nil, err
+	}
+	return &pb.OrderList{Items: orders}, nil
+}
+
 func (s *OrderServerImpl) Delete(ctx context.Context, in *pb.OrderRequest) (*pb.Order, error) {
 	if err := biz.Delete(orderTable, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Order{}, nil
+}
+
+func (s *OrderServerImpl) SignAlipay(ctx context.Context, in *pb.Order) (*pb.SignReply, error) {
+	v, err := biz.SignAlipay(in.Fee)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.SignReply{Signed: v}, nil
 }

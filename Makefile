@@ -1,7 +1,6 @@
 # Variables
 SERVICE=backend
 IMG_HUB?=docker.io/jmzwcn
-TAG?=latest
 # Version information
 VERSION=1.0.0
 REVISION=${shell git rev-parse --short HEAD}
@@ -9,6 +8,7 @@ RELEASE=production
 BUILD_HASH=${shell git rev-parse HEAD}
 BUILD_TIME=${shell date "+%Y-%m-%d@%H:%M:%SZ%z"}
 LD_FLAGS:=-X main.Version=$(VERSION) -X main.Revision=$(REVISION) -X main.Release=$(RELEASE) -X main.BuildHash=$(BUILD_HASH) -X main.BuildTime=$(BUILD_TIME)
+TAG?=${shell date "+%Y%m%d-%H%M"}
 
 ifeq (${shell uname -s}, Darwin)
 	SED=gsed
@@ -24,7 +24,7 @@ prepare:
 	@-docker network create --driver=overlay devel > /dev/null 2>&1  || true
 
 generate-go:prepare
-	@protoc -I${GOPATH}/src -I. \
+	@protoc -I${GOPATH}/src -I./service \
 	--gogofaster_out=\
 	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
@@ -32,14 +32,13 @@ generate-go:prepare
 	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/empty.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,\
-	plugins=grpc:../../../ \
-	 $(shell pwd)/service/*.proto
+	plugins=grpc:./service service/*.proto
 	@$(SED) -i '/google\/api/d' service/*.pb.go
 	@echo Generate successfully.
 
 generate-js:
-	@-mkdir $(shell pwd)/service/js > /dev/null 2>&1  || true
-	protoc -I./service service/*.proto \
+	@-mkdir service/js > /dev/null 2>&1  || true
+	protoc -I${GOPATH}/src -I./service service/*.proto \
 	--js_out=import_style=commonjs:service/js \
 	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/js
 	cp -rf service/js/* ../ui/src/sdk

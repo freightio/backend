@@ -4,8 +4,11 @@ import {
   AnnotationsEntry,
   OrderList,
   OrderRequest,
+  PayInfo,
   Position,
-  Sender} from './order_pb';
+  Sender,
+  SignReply,
+  User} from './order_pb';
 
 export class OrdersClient {
   constructor (hostname: string,
@@ -33,8 +36,15 @@ export class OrdersClient {
                response: Order) => void
   ): grpcWeb.ClientReadableStream<Order>;
 
-  list(
+  listByPositon(
     request: Position,
+    metadata: grpcWeb.Metadata,
+    callback: (err: grpcWeb.Error,
+               response: OrderList) => void
+  ): grpcWeb.ClientReadableStream<OrderList>;
+
+  listByUser(
+    request: User,
     metadata: grpcWeb.Metadata,
     callback: (err: grpcWeb.Error,
                response: OrderList) => void
@@ -46,6 +56,13 @@ export class OrdersClient {
     callback: (err: grpcWeb.Error,
                response: Order) => void
   ): grpcWeb.ClientReadableStream<Order>;
+
+  signAlipay(
+    request: Order,
+    metadata: grpcWeb.Metadata,
+    callback: (err: grpcWeb.Error,
+               response: SignReply) => void
+  ): grpcWeb.ClientReadableStream<SignReply>;
 
 }
 
@@ -69,8 +86,13 @@ export class OrdersPromiseClient {
     metadata: grpcWeb.Metadata
   ): Promise<Order>;
 
-  list(
+  listByPositon(
     request: Position,
+    metadata: grpcWeb.Metadata
+  ): Promise<OrderList>;
+
+  listByUser(
+    request: User,
     metadata: grpcWeb.Metadata
   ): Promise<OrderList>;
 
@@ -78,6 +100,11 @@ export class OrdersPromiseClient {
     request: OrderRequest,
     metadata: grpcWeb.Metadata
   ): Promise<Order>;
+
+  signAlipay(
+    request: Order,
+    metadata: grpcWeb.Metadata
+  ): Promise<SignReply>;
 
 }
 
