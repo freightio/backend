@@ -47,7 +47,7 @@ func (s *OrderServerImpl) ListByPositon(ctx context.Context, in *pb.Position) (*
 	orders := []*pb.Order{}
 	lat := strings.Split(in.Location, ",")[0]
 	lon := strings.Split(in.Location, ",")[1]
-	if err := biz.List("", &orders, biz.SQL(lon, lat)); err != nil {
+	if err := biz.List("", &orders, biz.DistanceSQL(lon, lat)); err != nil {
 		return nil, err
 	}
 	return &pb.OrderList{Items: orders}, nil
