@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"log"
 	"strings"
 	"time"
 
@@ -45,22 +44,11 @@ func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, 
 }
 
 func (s *OrderServerImpl) ListByPositon(ctx context.Context, in *pb.Position) (*pb.OrderList, error) {
-	log.Println("here ", in)
-	allOrders := []*pb.Order{}
-	if err := biz.List(orderTable, &allOrders, "where data->'$.status'<>'accept' or data->'$.status' is null order by data->'$.created' desc"); err != nil {
-		return nil, err
-	}
 	orders := []*pb.Order{}
-	if in.Location != "" {
-		loc1 := strings.Split(in.Location, ",")
-		for _, v := range allOrders {
-			loc2 := strings.Split(v.From.Location, ",")
-			if biz.EarthDistance(biz.S2F(loc1[0]), biz.S2F(loc1[1]), biz.S2F(loc2[0]), biz.S2F(loc2[1])) < 10000 {
-				orders = append(orders, v)
-			}
-		}
-	} else {
-		orders = allOrders
+	lat := strings.Split(in.Location, ",")[0]
+	lon := strings.Split(in.Location, ",")[1]
+	if err := biz.List("", &orders, biz.SQL(lon, lat)); err != nil {
+		return nil, err
 	}
 	return &pb.OrderList{Items: orders}, nil
 }

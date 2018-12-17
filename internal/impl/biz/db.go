@@ -142,7 +142,7 @@ func List(table string, result interface{}, clause ...string) error {
 	}
 	slicev := resultv.Elem()
 	elemt := slicev.Type().Elem()
-	query := "SELECT * FROM " + table
+	query := "SELECT data FROM " + table
 
 	if len(clause) > 0 {
 		for _, v := range clause {
