@@ -1,6 +1,7 @@
 import * as grpcWeb from 'grpc-web';
 import {
   User,
+  LabelsEntry,
   UserList,
   UserRequest} from './user_pb';
 

@@ -8,7 +8,8 @@ import {
   Position,
   Sender,
   SignReply,
-  User} from './order_pb';
+  User,
+  LabelsEntry} from './order_pb';
 
 export class OrdersClient {
   constructor (hostname: string,

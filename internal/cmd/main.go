@@ -22,6 +22,7 @@ func main() {
 	pb.RegisterGreeterServer(s, &impl.Server{})
 	pb.RegisterOrdersServer(s, &impl.OrderServerImpl{})
 	pb.RegisterUsersServer(s, &impl.UserServerImpl{})
+	pb.RegisterWalletsServer(s, &impl.WalletServerImpl{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

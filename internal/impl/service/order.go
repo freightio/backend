@@ -37,6 +37,9 @@ func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, 
 		return nil, err
 	}
 	order.Status = in.Status
+	if in.DriverId != "" {
+		order.DriverId = in.DriverId
+	}
 	if err := biz.Update(orderTable, in.Id, order); err != nil {
 		return nil, err
 	}
@@ -55,7 +58,7 @@ func (s *OrderServerImpl) ListByPositon(ctx context.Context, in *pb.Position) (*
 
 func (s *OrderServerImpl) ListByUser(ctx context.Context, in *pb.User) (*pb.OrderList, error) {
 	orders := []*pb.Order{}
-	if err := biz.List(orderTable, &orders, "where data->'$.sender.tel'='"+in.Tel+"' or data->'$.driverId'='"+in.Tel+"' order by data->'$.created' desc"); err != nil {
+	if err := biz.List(orderTable, &orders, "where data->'$.sender.id'='"+in.Id+"' or data->'$.driverId'='"+in.Id+"' order by data->'$.created' desc"); err != nil {
 		return nil, err
 	}
 	return &pb.OrderList{Items: orders}, nil

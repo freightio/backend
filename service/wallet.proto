@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "user.proto";
+//import "google/api/annotations.proto";
+//import "google/protobuf/timestamp.proto";
+
+package backend;
+
+service Wallets {
+  rpc Add(Account) returns (Account) {}  
+  rpc List(User) returns (AccountList) {}
+  rpc Total(Account) returns (Account) {}
+}
+
+message Account {
+  string id = 1;
+  string userId = 2;
+  float fee = 3; 
+  string orderId = 4;
+  int64 created = 5;
+  map<string,string> annotations = 6;  
+}
+
+message AccountList {
+  repeated Account items= 1;
+}

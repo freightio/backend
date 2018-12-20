@@ -22,7 +22,7 @@ message User {
   string tel = 4;
   int64 created = 5;
   string sign = 6;
- // map<string,string> annotations = 7;  
+  map<string,string> labels = 7;  
 }
 
 message UserRequest {
