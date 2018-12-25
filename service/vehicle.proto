@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+//import "google/api/annotations.proto";
+
+package backend;
+
+service Vehicles {
+  rpc List (Empty) returns (VehicleList) {}
+}
+
+message Vehicle {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string weight = 4;
+  string lwh = 5;
+  string cube = 6;
+  Price price = 7;
+}
+
+message Price {
+  Start start = 1;
+  float then = 2;
+}
+
+message Start {
+  int32 distance = 1;
+  float fee = 2;
+}
+
+message Empty {
+}
+
+message VehicleList {
+  repeated Vehicle items = 1;
+}

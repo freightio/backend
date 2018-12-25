@@ -29,7 +29,7 @@ func DistanceSQL(lon string, lat string) string {
         ) * 1000
     ) AS juli
 FROM
-   orders WHERE data->'$.status'<>'accept' or data->'$.status' is null 
+   orders WHERE data->'$.status' is null 
 ORDER BY
 	juli ASC ) as orders_juli`
 	fmt.Println(sqlQuery)

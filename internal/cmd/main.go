@@ -19,7 +19,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &impl.Server{})
+	pb.RegisterVehiclesServer(s, &impl.VehicleImpl{})
 	pb.RegisterOrdersServer(s, &impl.OrderServerImpl{})
 	pb.RegisterUsersServer(s, &impl.UserServerImpl{})
 	pb.RegisterWalletsServer(s, &impl.WalletServerImpl{})
