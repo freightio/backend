@@ -464,5 +464,175 @@ proto.backend.UsersPromiseClient.prototype.sign =
 };
 
 
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.backend.CertificationsClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
+
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
+};
+
+
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.backend.CertificationsPromiseClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!proto.backend.CertificationsClient} The delegate callback based client
+   */
+  this.delegateClient_ = new proto.backend.CertificationsClient(
+      hostname, credentials, options);
+
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.backend.Certification,
+ *   !proto.backend.Certification>}
+ */
+const methodInfo_Certifications_Add = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.Certification,
+  /** @param {!proto.backend.Certification} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.backend.Certification.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.backend.Certification} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.backend.Certification)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Certification>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.CertificationsClient.prototype.add =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/backend.Certifications/Add',
+      request,
+      metadata,
+      methodInfo_Certifications_Add,
+      callback);
+};
+
+
+/**
+ * @param {!proto.backend.Certification} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.backend.Certification>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.CertificationsPromiseClient.prototype.add =
+    function(request, metadata) {
+  return new Promise((resolve, reject) => {
+    this.delegateClient_.add(
+      request, metadata, (error, response) => {
+        error ? reject(error) : resolve(response);
+      });
+  });
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.backend.UserRequest,
+ *   !proto.backend.CertificationList>}
+ */
+const methodInfo_Certifications_List = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.CertificationList,
+  /** @param {!proto.backend.UserRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.backend.CertificationList.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.backend.UserRequest} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.backend.CertificationList)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.CertificationList>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.CertificationsClient.prototype.list =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/backend.Certifications/List',
+      request,
+      metadata,
+      methodInfo_Certifications_List,
+      callback);
+};
+
+
+/**
+ * @param {!proto.backend.UserRequest} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.backend.CertificationList>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.CertificationsPromiseClient.prototype.list =
+    function(request, metadata) {
+  return new Promise((resolve, reject) => {
+    this.delegateClient_.list(
+      request, metadata, (error, response) => {
+        error ? reject(error) : resolve(response);
+      });
+  });
+};
+
+
 module.exports = proto.backend;
 

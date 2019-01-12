@@ -15,7 +15,13 @@ service Users {
   rpc Sign (User) returns (User) {}
 }
 
+service Certifications {
+  rpc Add (Certification) returns (Certification) {}
+  rpc List (UserRequest) returns (CertificationList) {}
+}
+
 message User {
+  //id==tel for now
   string id = 1;
   string name = 2;
   string password = 3;
@@ -31,4 +37,14 @@ message UserRequest {
 
 message UserList {
   repeated User items = 1;
+}
+
+message Certification {
+  string userId = 1;
+  string name = 2;
+  string imageData = 3;
+}
+
+message CertificationList {
+  repeated Certification items = 1;
 }

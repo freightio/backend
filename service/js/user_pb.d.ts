@@ -1,3 +1,39 @@
+export class Certification {
+  constructor ();
+  getUserid(): string;
+  setUserid(a: string): void;
+  getName(): string;
+  setName(a: string): void;
+  getImagedata(): string;
+  setImagedata(a: string): void;
+  toObject(): Certification.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => Certification;
+}
+
+export namespace Certification {
+  export type AsObject = {
+    Userid: string;
+    Name: string;
+    Imagedata: string;
+  }
+}
+
+export class CertificationList {
+  constructor ();
+  getItemsList(): Certification[];
+  setItemsList(a: Certification[]): void;
+  toObject(): CertificationList.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => CertificationList;
+}
+
+export namespace CertificationList {
+  export type AsObject = {
+    ItemsList: Certification[];
+  }
+}
+
 export class User {
   constructor ();
   getId(): string;
