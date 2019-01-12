@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"time"
 
 	"github.com/freightio/backend/internal/impl/biz"
 	pb "github.com/freightio/backend/service"
@@ -14,6 +15,8 @@ const (
 type CertificationImpl struct{}
 
 func (s *CertificationImpl) Add(ctx context.Context, in *pb.Certification) (*pb.Certification, error) {
+	in.Id = time.Now().String()
+	in.Created = time.Now().Unix()
 	if err := biz.Insert(certificationTable, in); err != nil {
 		return nil, err
 	}
