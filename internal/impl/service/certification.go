@@ -20,10 +20,38 @@ func (s *CertificationImpl) Add(ctx context.Context, in *pb.Certification) (*pb.
 	return in, nil
 }
 
-func (s *CertificationImpl) List(ctx context.Context, in *pb.UserRequest) (*pb.CertificationList, error) {
-	certifications := []*pb.Certification{}
-	if err := biz.List(certificationTable, &certifications, "WHERE data->'$.userId'='"+in.Id+"'"); err != nil {
+//update status for now
+func (s *CertificationImpl) Update(ctx context.Context, in *pb.Certification) (*pb.Certification, error) {
+	certification := pb.Certification{}
+	if err := biz.GetById(certificationTable, in.Id, &certification); err != nil {
 		return nil, err
 	}
-	return &pb.CertificationList{Items: certifications}, nil
+
+	certification.Status = in.Status
+	if err := biz.Update(certificationTable, in.Id, certification); err != nil {
+		return nil, err
+	}
+	return in, nil
+}
+
+func (s *CertificationImpl) List(cert *pb.Certification, stream pb.Certifications_ListServer) error {
+	clause := ""
+	if cert.UserId != "" {
+		clause = "WHERE data->'$.userId'='" + cert.UserId + "'"
+	}
+	//admin only
+	if cert.Status != "" {
+		clause = "WHERE data->'$.status'='" + cert.Status + "'"
+	}
+	certifications := []*pb.Certification{}
+	if err := biz.List(certificationTable, &certifications, clause); err != nil {
+		return err
+	}
+
+	for _, v := range certifications {
+		if err := stream.Send(v); err != nil {
+			return err
+		}
+	}
+	return nil
 }

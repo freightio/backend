@@ -246,55 +246,49 @@ proto.backend.OrdersPromiseClient.prototype.update =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.backend.Position,
- *   !proto.backend.OrderList>}
+ *   !proto.backend.Order>}
  */
 const methodInfo_Orders_ListByPositon = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.OrderList,
+  proto.backend.Order,
   /** @param {!proto.backend.Position} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.OrderList.deserializeBinary
+  proto.backend.Order.deserializeBinary
 );
 
 
 /**
- * @param {!proto.backend.Position} request The
- *     request proto
+ * @param {!proto.backend.Position} request The request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.OrderList)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.OrderList>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Order>}
  *     The XHR Node Readable Stream
  */
 proto.backend.OrdersClient.prototype.listByPositon =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Orders/ListByPositon',
       request,
       metadata,
-      methodInfo_Orders_ListByPositon,
-      callback);
+      methodInfo_Orders_ListByPositon);
 };
 
 
 /**
- * @param {!proto.backend.Position} request The
- *     request proto
+ * @param {!proto.backend.Position} request The request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.OrderList>}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Order>}
  *     The XHR Node Readable Stream
  */
 proto.backend.OrdersPromiseClient.prototype.listByPositon =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.listByPositon(
-      request, metadata, (error, response) => {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.delegateClient_.client_.serverStreaming(this.delegateClient_.hostname_ +
+      '/backend.Orders/ListByPositon',
+      request,
+      metadata,
+      methodInfo_Orders_ListByPositon);
 };
 
 

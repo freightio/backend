@@ -10,7 +10,7 @@ service Orders {
   rpc Add (Order) returns (Order) {}
   rpc Get (OrderRequest) returns (Order) {}
   rpc Update (Order) returns (Order) {}
-  rpc ListByPositon (Position) returns (OrderList) {}
+  rpc ListByPositon (Position) returns (stream Order) {}
   rpc ListByUser (User) returns (OrderList) {}
   rpc Delete (OrderRequest) returns (Order) {}
   //fee required

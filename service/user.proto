@@ -17,7 +17,8 @@ service Users {
 
 service Certifications {
   rpc Add (Certification) returns (Certification) {}
-  rpc List (UserRequest) returns (CertificationList) {}
+  rpc Update (Certification) returns (Certification) {}
+  rpc List (Certification) returns (stream Certification) {}
 }
 
 message User {
@@ -40,11 +41,10 @@ message UserList {
 }
 
 message Certification {
-  string userId = 1;
-  string name = 2;
-  string imageData = 3;
-}
-
-message CertificationList {
-  repeated Certification items = 1;
+  string id = 1;
+  string userId = 2;
+  string name = 3;
+  string imageData = 4;
+  string status = 5;
+  int64 created = 6;
 }

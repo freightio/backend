@@ -581,56 +581,106 @@ proto.backend.CertificationsPromiseClient.prototype.add =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.backend.UserRequest,
- *   !proto.backend.CertificationList>}
+ *   !proto.backend.Certification,
+ *   !proto.backend.Certification>}
  */
-const methodInfo_Certifications_List = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.CertificationList,
-  /** @param {!proto.backend.UserRequest} request */
+const methodInfo_Certifications_Update = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.Certification,
+  /** @param {!proto.backend.Certification} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.CertificationList.deserializeBinary
+  proto.backend.Certification.deserializeBinary
 );
 
 
 /**
- * @param {!proto.backend.UserRequest} request The
+ * @param {!proto.backend.Certification} request The
  *     request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.CertificationList)}
+ * @param {function(?grpc.web.Error, ?proto.backend.Certification)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.CertificationList>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Certification>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.backend.CertificationsClient.prototype.list =
+proto.backend.CertificationsClient.prototype.update =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/backend.Certifications/List',
+      '/backend.Certifications/Update',
       request,
       metadata,
-      methodInfo_Certifications_List,
+      methodInfo_Certifications_Update,
       callback);
 };
 
 
 /**
- * @param {!proto.backend.UserRequest} request The
+ * @param {!proto.backend.Certification} request The
  *     request proto
  * @param {!Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.CertificationList>}
+ * @return {!Promise<!proto.backend.Certification>}
  *     The XHR Node Readable Stream
  */
-proto.backend.CertificationsPromiseClient.prototype.list =
+proto.backend.CertificationsPromiseClient.prototype.update =
     function(request, metadata) {
   return new Promise((resolve, reject) => {
-    this.delegateClient_.list(
+    this.delegateClient_.update(
       request, metadata, (error, response) => {
         error ? reject(error) : resolve(response);
       });
   });
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.backend.Certification,
+ *   !proto.backend.Certification>}
+ */
+const methodInfo_Certifications_List = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.Certification,
+  /** @param {!proto.backend.Certification} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.backend.Certification.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.backend.Certification} request The request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Certification>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.CertificationsClient.prototype.list =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/backend.Certifications/List',
+      request,
+      metadata,
+      methodInfo_Certifications_List);
+};
+
+
+/**
+ * @param {!proto.backend.Certification} request The request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Certification>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.CertificationsPromiseClient.prototype.list =
+    function(request, metadata) {
+  return this.delegateClient_.client_.serverStreaming(this.delegateClient_.hostname_ +
+      '/backend.Certifications/List',
+      request,
+      metadata,
+      methodInfo_Certifications_List);
 };
 
 

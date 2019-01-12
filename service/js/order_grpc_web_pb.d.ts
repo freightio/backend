@@ -39,10 +39,8 @@ export class OrdersClient {
 
   listByPositon(
     request: Position,
-    metadata: grpcWeb.Metadata,
-    callback: (err: grpcWeb.Error,
-               response: OrderList) => void
-  ): grpcWeb.ClientReadableStream<OrderList>;
+    metadata: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<Order>;
 
   listByUser(
     request: User,
@@ -90,7 +88,7 @@ export class OrdersPromiseClient {
   listByPositon(
     request: Position,
     metadata: grpcWeb.Metadata
-  ): Promise<OrderList>;
+  ): grpcWeb.ClientReadableStream<Order>;
 
   listByUser(
     request: User,

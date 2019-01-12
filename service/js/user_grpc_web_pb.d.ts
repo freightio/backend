@@ -1,7 +1,6 @@
 import * as grpcWeb from 'grpc-web';
 import {
   Certification,
-  CertificationList,
   User,
   LabelsEntry,
   UserList,
@@ -75,12 +74,17 @@ export class CertificationsClient {
                response: Certification) => void
   ): grpcWeb.ClientReadableStream<Certification>;
 
-  list(
-    request: UserRequest,
+  update(
+    request: Certification,
     metadata: grpcWeb.Metadata,
     callback: (err: grpcWeb.Error,
-               response: CertificationList) => void
-  ): grpcWeb.ClientReadableStream<CertificationList>;
+               response: Certification) => void
+  ): grpcWeb.ClientReadableStream<Certification>;
+
+  list(
+    request: Certification,
+    metadata: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<Certification>;
 
 }
 
@@ -136,10 +140,15 @@ export class CertificationsPromiseClient {
     metadata: grpcWeb.Metadata
   ): Promise<Certification>;
 
-  list(
-    request: UserRequest,
+  update(
+    request: Certification,
     metadata: grpcWeb.Metadata
-  ): Promise<CertificationList>;
+  ): Promise<Certification>;
+
+  list(
+    request: Certification,
+    metadata: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<Certification>;
 
 }
 

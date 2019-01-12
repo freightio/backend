@@ -46,14 +46,21 @@ func (s *OrderServerImpl) Update(ctx context.Context, in *pb.Order) (*pb.Order, 
 	return in, nil
 }
 
-func (s *OrderServerImpl) ListByPositon(ctx context.Context, in *pb.Position) (*pb.OrderList, error) {
+func (s *OrderServerImpl) ListByPositon(in *pb.Position, stream pb.Orders_ListByPositonServer) error {
 	orders := []*pb.Order{}
 	lat := strings.Split(in.Location, ",")[0]
 	lon := strings.Split(in.Location, ",")[1]
 	if err := biz.List("", &orders, biz.DistanceSQL(lon, lat)); err != nil {
-		return nil, err
+		return err
 	}
-	return &pb.OrderList{Items: orders}, nil
+
+	for _, v := range orders {
+		if err := stream.Send(v); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (s *OrderServerImpl) ListByUser(ctx context.Context, in *pb.User) (*pb.OrderList, error) {
