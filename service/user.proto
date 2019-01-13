@@ -19,6 +19,7 @@ service Certifications {
   rpc Add (Certification) returns (Certification) {}
   rpc Update (Certification) returns (Certification) {}
   rpc List (Certification) returns (stream Certification) {}
+  rpc IsVerified(UserRequest) returns (Verified) {}
 }
 
 message User {
@@ -47,4 +48,8 @@ message Certification {
   string imageData = 4;
   string status = 5;
   int64 created = 6;
+}
+
+message Verified {
+  bool result = 1;
 }

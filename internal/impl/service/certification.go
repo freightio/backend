@@ -58,3 +58,21 @@ func (s *CertificationImpl) List(cert *pb.Certification, stream pb.Certification
 	}
 	return nil
 }
+
+func (s *CertificationImpl) IsVerified(ctx context.Context, in *pb.UserRequest) (*pb.Verified, error) {
+	certifications := []*pb.Certification{}
+	if err := biz.List(certificationTable, &certifications, "WHERE data->'$.userId'='"+in.Id+"'"); err != nil {
+		return nil, err
+	}
+	if len(certifications) == 0 {
+		return &pb.Verified{Result: false}, nil
+	}
+	verified := true
+	for _, v := range certifications {
+		if v.Status != "pass" {
+			verified = false
+			break
+		}
+	}
+	return &pb.Verified{Result: verified}, nil
+}

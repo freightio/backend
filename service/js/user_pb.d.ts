@@ -128,3 +128,18 @@ export namespace UserRequest {
   }
 }
 
+export class Verified {
+  constructor ();
+  getResult(): boolean;
+  setResult(a: boolean): void;
+  toObject(): Verified.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => Verified;
+}
+
+export namespace Verified {
+  export type AsObject = {
+    Result: boolean;
+  }
+}
+

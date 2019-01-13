@@ -4,7 +4,8 @@ import {
   User,
   LabelsEntry,
   UserList,
-  UserRequest} from './user_pb';
+  UserRequest,
+  Verified} from './user_pb';
 
 export class UsersClient {
   constructor (hostname: string,
@@ -86,6 +87,13 @@ export class CertificationsClient {
     metadata: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<Certification>;
 
+  isVerified(
+    request: UserRequest,
+    metadata: grpcWeb.Metadata,
+    callback: (err: grpcWeb.Error,
+               response: Verified) => void
+  ): grpcWeb.ClientReadableStream<Verified>;
+
 }
 
 export class UsersPromiseClient {
@@ -149,6 +157,11 @@ export class CertificationsPromiseClient {
     request: Certification,
     metadata: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<Certification>;
+
+  isVerified(
+    request: UserRequest,
+    metadata: grpcWeb.Metadata
+  ): Promise<Verified>;
 
 }
 
