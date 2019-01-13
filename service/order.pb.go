@@ -47,7 +47,7 @@ func (m *Order) Reset()         { *m = Order{} }
 func (m *Order) String() string { return proto.CompactTextString(m) }
 func (*Order) ProtoMessage()    {}
 func (*Order) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{0}
+	return fileDescriptor_order_b0d968191f182ac3, []int{0}
 }
 func (m *Order) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -170,7 +170,7 @@ func (m *Position) Reset()         { *m = Position{} }
 func (m *Position) String() string { return proto.CompactTextString(m) }
 func (*Position) ProtoMessage()    {}
 func (*Position) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{1}
+	return fileDescriptor_order_b0d968191f182ac3, []int{1}
 }
 func (m *Position) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -230,7 +230,7 @@ func (m *Sender) Reset()         { *m = Sender{} }
 func (m *Sender) String() string { return proto.CompactTextString(m) }
 func (*Sender) ProtoMessage()    {}
 func (*Sender) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{2}
+	return fileDescriptor_order_b0d968191f182ac3, []int{2}
 }
 func (m *Sender) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -288,7 +288,7 @@ func (m *OrderRequest) Reset()         { *m = OrderRequest{} }
 func (m *OrderRequest) String() string { return proto.CompactTextString(m) }
 func (*OrderRequest) ProtoMessage()    {}
 func (*OrderRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{3}
+	return fileDescriptor_order_b0d968191f182ac3, []int{3}
 }
 func (m *OrderRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -332,7 +332,7 @@ func (m *OrderList) Reset()         { *m = OrderList{} }
 func (m *OrderList) String() string { return proto.CompactTextString(m) }
 func (*OrderList) ProtoMessage()    {}
 func (*OrderList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{4}
+	return fileDescriptor_order_b0d968191f182ac3, []int{4}
 }
 func (m *OrderList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -376,7 +376,7 @@ func (m *SignReply) Reset()         { *m = SignReply{} }
 func (m *SignReply) String() string { return proto.CompactTextString(m) }
 func (*SignReply) ProtoMessage()    {}
 func (*SignReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{5}
+	return fileDescriptor_order_b0d968191f182ac3, []int{5}
 }
 func (m *SignReply) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -422,7 +422,7 @@ func (m *PayInfo) Reset()         { *m = PayInfo{} }
 func (m *PayInfo) String() string { return proto.CompactTextString(m) }
 func (*PayInfo) ProtoMessage()    {}
 func (*PayInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_749c459b5f2d0d36, []int{6}
+	return fileDescriptor_order_b0d968191f182ac3, []int{6}
 }
 func (m *PayInfo) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -494,7 +494,6 @@ type OrdersClient interface {
 	ListByPositon(ctx context.Context, in *Position, opts ...grpc.CallOption) (Orders_ListByPositonClient, error)
 	ListByUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*OrderList, error)
 	Delete(ctx context.Context, in *OrderRequest, opts ...grpc.CallOption) (*Order, error)
-	// fee required
 	SignAlipay(ctx context.Context, in *Order, opts ...grpc.CallOption) (*SignReply, error)
 }
 
@@ -600,7 +599,6 @@ type OrdersServer interface {
 	ListByPositon(*Position, Orders_ListByPositonServer) error
 	ListByUser(context.Context, *User) (*OrderList, error)
 	Delete(context.Context, *OrderRequest) (*Order, error)
-	// fee required
 	SignAlipay(context.Context, *Order) (*SignReply, error)
 }
 
@@ -2456,9 +2454,9 @@ var (
 	ErrIntOverflowOrder   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("order.proto", fileDescriptor_order_749c459b5f2d0d36) }
+func init() { proto.RegisterFile("order.proto", fileDescriptor_order_b0d968191f182ac3) }
 
-var fileDescriptor_order_749c459b5f2d0d36 = []byte{
+var fileDescriptor_order_b0d968191f182ac3 = []byte{
 	// 592 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x54, 0xdd, 0x6a, 0x13, 0x41,
 	0x14, 0xce, 0xee, 0x36, 0x9b, 0xe6, 0xa4, 0xad, 0xf1, 0xa0, 0x32, 0x04, 0x59, 0xc3, 0x56, 0x69,

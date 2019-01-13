@@ -690,7 +690,7 @@ proto.backend.CertificationsPromiseClient.prototype.list =
  *   !proto.backend.UserRequest,
  *   !proto.backend.Verified>}
  */
-const methodInfo_Certifications_IsVerified = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_Certifications_Verify = new grpc.web.AbstractClientBase.MethodInfo(
   proto.backend.Verified,
   /** @param {!proto.backend.UserRequest} request */
   function(request) {
@@ -710,13 +710,13 @@ const methodInfo_Certifications_IsVerified = new grpc.web.AbstractClientBase.Met
  * @return {!grpc.web.ClientReadableStream<!proto.backend.Verified>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.backend.CertificationsClient.prototype.isVerified =
+proto.backend.CertificationsClient.prototype.verify =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/backend.Certifications/IsVerified',
+      '/backend.Certifications/Verify',
       request,
       metadata,
-      methodInfo_Certifications_IsVerified,
+      methodInfo_Certifications_Verify,
       callback);
 };
 
@@ -729,10 +729,10 @@ proto.backend.CertificationsClient.prototype.isVerified =
  * @return {!Promise<!proto.backend.Verified>}
  *     The XHR Node Readable Stream
  */
-proto.backend.CertificationsPromiseClient.prototype.isVerified =
+proto.backend.CertificationsPromiseClient.prototype.verify =
     function(request, metadata) {
   return new Promise((resolve, reject) => {
-    this.delegateClient_.isVerified(
+    this.delegateClient_.verify(
       request, metadata, (error, response) => {
         error ? reject(error) : resolve(response);
       });

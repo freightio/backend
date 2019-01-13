@@ -87,7 +87,7 @@ export class CertificationsClient {
     metadata: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<Certification>;
 
-  isVerified(
+  verify(
     request: UserRequest,
     metadata: grpcWeb.Metadata,
     callback: (err: grpcWeb.Error,
@@ -158,7 +158,7 @@ export class CertificationsPromiseClient {
     metadata: grpcWeb.Metadata
   ): grpcWeb.ClientReadableStream<Certification>;
 
-  isVerified(
+  verify(
     request: UserRequest,
     metadata: grpcWeb.Metadata
   ): Promise<Verified>;

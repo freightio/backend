@@ -19,7 +19,7 @@ service Certifications {
   rpc Add (Certification) returns (Certification) {}
   rpc Update (Certification) returns (Certification) {}
   rpc List (Certification) returns (stream Certification) {}
-  rpc IsVerified(UserRequest) returns (Verified) {}
+  rpc Verify(UserRequest) returns (Verified) {}
 }
 
 message User {
