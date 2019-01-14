@@ -10,9 +10,9 @@ service Orders {
   rpc Add (Order) returns (Order) {}
   rpc Get (OrderRequest) returns (Order) {}
   rpc Update (Order) returns (Order) {}
+  rpc Delete (OrderRequest) returns (Order) {}
   rpc ListByPositon (Position) returns (stream Order) {}
-  rpc ListByUser (User) returns (OrderList) {}
-  rpc Delete (OrderRequest) returns (Order) {}  
+  rpc ListByUser (User) returns (OrderList) {}  
   rpc SignAlipay (Order) returns (SignReply) {} //fee required
 }
 

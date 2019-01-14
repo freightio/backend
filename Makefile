@@ -43,8 +43,9 @@ generate-js:
 	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/js
 	cp -rf service/js/* ../ui/src/sdk
 	@echo Generate successfully.
+
 build:prepare generate-go
-	go build -ldflags='-linkmode external -extldflags -static $(LD_FLAGS)' -o bundles/$(SERVICE) internal/cmd/main.go
+	go build -ldflags='-linkmode external -extldflags -static $(LD_FLAGS)' -o bundles/$(SERVICE) internal/cmd/*.go
 
 image:build
 	docker build -t $(IMG_HUB)/$(SERVICE):$(TAG) .

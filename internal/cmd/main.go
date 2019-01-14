@@ -18,7 +18,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	s := grpc.NewServer()
+	s := grpc.NewServer(interceptors()...)
 	pb.RegisterVehiclesServer(s, &impl.VehicleImpl{})
 	pb.RegisterOrdersServer(s, &impl.OrderServerImpl{})
 	pb.RegisterUsersServer(s, &impl.UserServerImpl{})
