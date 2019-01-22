@@ -17,7 +17,6 @@ type OrderServerImpl struct{}
 
 func (s *OrderServerImpl) Add(ctx context.Context, in *pb.Order) (*pb.Order, error) {
 	in.Id = time.Now().String()
-	in.Created = time.Now().Unix()
 	if err := biz.Insert(orderTable, in); err != nil {
 		return nil, err
 	}

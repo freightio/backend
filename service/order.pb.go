@@ -47,7 +47,7 @@ func (m *Order) Reset()         { *m = Order{} }
 func (m *Order) String() string { return proto.CompactTextString(m) }
 func (*Order) ProtoMessage()    {}
 func (*Order) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{0}
+	return fileDescriptor_order_d3e559d654366be7, []int{0}
 }
 func (m *Order) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -170,7 +170,7 @@ func (m *Position) Reset()         { *m = Position{} }
 func (m *Position) String() string { return proto.CompactTextString(m) }
 func (*Position) ProtoMessage()    {}
 func (*Position) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{1}
+	return fileDescriptor_order_d3e559d654366be7, []int{1}
 }
 func (m *Position) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -230,7 +230,7 @@ func (m *Sender) Reset()         { *m = Sender{} }
 func (m *Sender) String() string { return proto.CompactTextString(m) }
 func (*Sender) ProtoMessage()    {}
 func (*Sender) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{2}
+	return fileDescriptor_order_d3e559d654366be7, []int{2}
 }
 func (m *Sender) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -288,7 +288,7 @@ func (m *OrderRequest) Reset()         { *m = OrderRequest{} }
 func (m *OrderRequest) String() string { return proto.CompactTextString(m) }
 func (*OrderRequest) ProtoMessage()    {}
 func (*OrderRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{3}
+	return fileDescriptor_order_d3e559d654366be7, []int{3}
 }
 func (m *OrderRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -332,7 +332,7 @@ func (m *OrderList) Reset()         { *m = OrderList{} }
 func (m *OrderList) String() string { return proto.CompactTextString(m) }
 func (*OrderList) ProtoMessage()    {}
 func (*OrderList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{4}
+	return fileDescriptor_order_d3e559d654366be7, []int{4}
 }
 func (m *OrderList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -376,7 +376,7 @@ func (m *SignReply) Reset()         { *m = SignReply{} }
 func (m *SignReply) String() string { return proto.CompactTextString(m) }
 func (*SignReply) ProtoMessage()    {}
 func (*SignReply) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{5}
+	return fileDescriptor_order_d3e559d654366be7, []int{5}
 }
 func (m *SignReply) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -422,7 +422,7 @@ func (m *PayInfo) Reset()         { *m = PayInfo{} }
 func (m *PayInfo) String() string { return proto.CompactTextString(m) }
 func (*PayInfo) ProtoMessage()    {}
 func (*PayInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_order_9906f736916c2a43, []int{6}
+	return fileDescriptor_order_d3e559d654366be7, []int{6}
 }
 func (m *PayInfo) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -2454,9 +2454,9 @@ var (
 	ErrIntOverflowOrder   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("order.proto", fileDescriptor_order_9906f736916c2a43) }
+func init() { proto.RegisterFile("order.proto", fileDescriptor_order_d3e559d654366be7) }
 
-var fileDescriptor_order_9906f736916c2a43 = []byte{
+var fileDescriptor_order_d3e559d654366be7 = []byte{
 	// 592 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x54, 0xdd, 0x6a, 0xd4, 0x40,
 	0x14, 0xde, 0x24, 0xdd, 0x6c, 0xf7, 0x6c, 0x5b, 0xd7, 0x83, 0xca, 0xb0, 0x48, 0x5c, 0x52, 0xa5,

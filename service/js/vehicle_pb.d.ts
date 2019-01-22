@@ -1,15 +1,3 @@
-export class Empty {
-  constructor ();
-  toObject(): Empty.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Empty;
-}
-
-export namespace Empty {
-  export type AsObject = {
-  }
-}
-
 export class Price {
   constructor ();
   getStart(): Start;
@@ -91,6 +79,18 @@ export class VehicleList {
 export namespace VehicleList {
   export type AsObject = {
     ItemsList: Vehicle[];
+  }
+}
+
+export class Empty {
+  constructor ();
+  toObject(): Empty.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => Empty;
+}
+
+export namespace Empty {
+  export type AsObject = {
   }
 }
 

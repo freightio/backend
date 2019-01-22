@@ -245,6 +245,62 @@ proto.backend.OrdersPromiseClient.prototype.update =
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.backend.OrderRequest,
+ *   !proto.backend.Order>}
+ */
+const methodInfo_Orders_Delete = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.backend.Order,
+  /** @param {!proto.backend.OrderRequest} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.backend.Order.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.backend.OrderRequest} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.backend.Order)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Order>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.OrdersClient.prototype.delete =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/backend.Orders/Delete',
+      request,
+      metadata,
+      methodInfo_Orders_Delete,
+      callback);
+};
+
+
+/**
+ * @param {!proto.backend.OrderRequest} request The
+ *     request proto
+ * @param {!Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.backend.Order>}
+ *     The XHR Node Readable Stream
+ */
+proto.backend.OrdersPromiseClient.prototype.delete =
+    function(request, metadata) {
+  return new Promise((resolve, reject) => {
+    this.delegateClient_.delete(
+      request, metadata, (error, response) => {
+        error ? reject(error) : resolve(response);
+      });
+  });
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.backend.Position,
  *   !proto.backend.Order>}
  */
@@ -341,62 +397,6 @@ proto.backend.OrdersPromiseClient.prototype.listByUser =
     function(request, metadata) {
   return new Promise((resolve, reject) => {
     this.delegateClient_.listByUser(
-      request, metadata, (error, response) => {
-        error ? reject(error) : resolve(response);
-      });
-  });
-};
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.backend.OrderRequest,
- *   !proto.backend.Order>}
- */
-const methodInfo_Orders_Delete = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.Order,
-  /** @param {!proto.backend.OrderRequest} request */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.backend.Order.deserializeBinary
-);
-
-
-/**
- * @param {!proto.backend.OrderRequest} request The
- *     request proto
- * @param {!Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.Order)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.Order>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.backend.OrdersClient.prototype.delete =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/backend.Orders/Delete',
-      request,
-      metadata,
-      methodInfo_Orders_Delete,
-      callback);
-};
-
-
-/**
- * @param {!proto.backend.OrderRequest} request The
- *     request proto
- * @param {!Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.backend.Order>}
- *     The XHR Node Readable Stream
- */
-proto.backend.OrdersPromiseClient.prototype.delete =
-    function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.delete(
       request, metadata, (error, response) => {
         error ? reject(error) : resolve(response);
       });

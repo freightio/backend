@@ -40,7 +40,7 @@ func (m *Account) Reset()         { *m = Account{} }
 func (m *Account) String() string { return proto.CompactTextString(m) }
 func (*Account) ProtoMessage()    {}
 func (*Account) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wallet_ccaa26afea752b93, []int{0}
+	return fileDescriptor_wallet_e7ab62d23f105db2, []int{0}
 }
 func (m *Account) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -119,7 +119,7 @@ func (m *AccountList) Reset()         { *m = AccountList{} }
 func (m *AccountList) String() string { return proto.CompactTextString(m) }
 func (*AccountList) ProtoMessage()    {}
 func (*AccountList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_wallet_ccaa26afea752b93, []int{1}
+	return fileDescriptor_wallet_e7ab62d23f105db2, []int{1}
 }
 func (m *AccountList) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -936,9 +936,9 @@ var (
 	ErrIntOverflowWallet   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("wallet.proto", fileDescriptor_wallet_ccaa26afea752b93) }
+func init() { proto.RegisterFile("wallet.proto", fileDescriptor_wallet_e7ab62d23f105db2) }
 
-var fileDescriptor_wallet_ccaa26afea752b93 = []byte{
+var fileDescriptor_wallet_e7ab62d23f105db2 = []byte{
 	// 328 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x91, 0x41, 0x4b, 0xc3, 0x30,
 	0x14, 0xc7, 0x9b, 0x76, 0x5d, 0xf1, 0x4d, 0x65, 0x84, 0x21, 0xa1, 0x87, 0x52, 0x77, 0x90, 0x82,

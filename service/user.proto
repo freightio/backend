@@ -1,16 +1,16 @@
 syntax = "proto3";
 
 //import "google/api/annotations.proto";
-//import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 package backend;
 
 service Users {
   rpc Add (User) returns (User) {}
-  rpc Get (UserRequest) returns (User) {}
+  rpc Get (IDRequest) returns (User) {}
   rpc Update (User) returns (User) {}
   rpc List (User) returns (UserList) {}
-  rpc Delete (UserRequest) returns (User) {}
+  rpc Delete (IDRequest) returns (User) {}
   rpc Login (User) returns (User) {}
   rpc Sign (User) returns (User) {}
 }
@@ -19,7 +19,7 @@ service Certifications {
   rpc Add (Certification) returns (Certification) {}
   rpc Update (Certification) returns (Certification) {}
   rpc List (Certification) returns (stream Certification) {}
-  rpc Verify(UserRequest) returns (Verified) {}
+  rpc Verify(IDRequest) returns (google.protobuf.BoolValue) {}
 }
 
 message User {
@@ -30,10 +30,10 @@ message User {
   string tel = 4;
   int64 created = 5;
   string sign = 6;
-  map<string,string> labels = 7;  
+  map<string,string> labels = 7;
 }
 
-message UserRequest {
+message IDRequest {
   string id = 1;
 }
 
@@ -48,8 +48,4 @@ message Certification {
   string imageData = 4;
   string status = 5;
   int64 created = 6;
-}
-
-message Verified {
-  bool result = 1;
 }

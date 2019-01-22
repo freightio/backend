@@ -6,6 +6,7 @@ import (
 
 	"github.com/freightio/backend/internal/impl/biz"
 	pb "github.com/freightio/backend/service"
+	"github.com/gogo/protobuf/types"
 )
 
 const (
@@ -59,13 +60,13 @@ func (s *CertificationImpl) List(cert *pb.Certification, stream pb.Certification
 	return nil
 }
 
-func (s *CertificationImpl) Verify(ctx context.Context, in *pb.UserRequest) (*pb.Verified, error) {
+func (s *CertificationImpl) Verify(ctx context.Context, in *pb.IDRequest) (*types.BoolValue, error) {
 	certifications := []*pb.Certification{}
 	if err := biz.List(certificationTable, &certifications, "WHERE data->'$.userId'='"+in.Id+"'"); err != nil {
 		return nil, err
 	}
 	if len(certifications) == 0 {
-		return &pb.Verified{Result: false}, nil
+		return &types.BoolValue{Value: false}, nil
 	}
 	verified := true
 	for _, v := range certifications {
@@ -74,5 +75,5 @@ func (s *CertificationImpl) Verify(ctx context.Context, in *pb.UserRequest) (*pb
 			break
 		}
 	}
-	return &pb.Verified{Result: verified}, nil
+	return &types.BoolValue{Value: verified}, nil
 }

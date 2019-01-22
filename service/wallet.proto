@@ -2,7 +2,6 @@ syntax = "proto3";
 
 import "user.proto";
 //import "google/api/annotations.proto";
-//import "google/protobuf/timestamp.proto";
 
 package backend;
 

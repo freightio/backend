@@ -23,6 +23,8 @@ prepare:
 	@-docker swarm init > /dev/null 2>&1  || true
 	@-docker network create --driver=overlay devel > /dev/null 2>&1  || true
 
+generate:generate-js generate-go
+
 generate-go:prepare
 	@protoc -I${GOPATH}/src -I./service \
 	--gogofaster_out=\
@@ -34,15 +36,15 @@ generate-go:prepare
 	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,\
 	plugins=grpc:./service service/*.proto
 	@$(SED) -i '/google\/api/d' service/*.pb.go
-	@echo Generate successfully.
+	@echo Generate-go successfully.
 
 generate-js:
 	@-mkdir service/js > /dev/null 2>&1  || true
-	protoc -I${GOPATH}/src -I./service service/*.proto \
+	@protoc -I${GOPATH}/src -I./service service/*.proto \
 	--js_out=import_style=commonjs:service/js \
 	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/js
-	cp -rf service/js/* ../ui/src/sdk
-	@echo Generate successfully.
+	cp -rf service/js/* ../client/src/sdk
+	@echo Generate-js successfully.
 
 build:prepare generate-go
 	go build -ldflags='-linkmode external -extldflags -static $(LD_FLAGS)' -o bundles/$(SERVICE) internal/cmd/*.go

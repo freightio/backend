@@ -1,11 +1,12 @@
 syntax = "proto3";
 
 //import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 
 package backend;
 
 service Vehicles {
-  rpc List (Empty) returns (VehicleList) {}
+  rpc List (google.protobuf.Empty) returns (VehicleList) {}
 }
 
 message Vehicle {
@@ -26,9 +27,6 @@ message Price {
 message Start {
   int32 distance = 1;
   float fee = 2;
-}
-
-message Empty {
 }
 
 message VehicleList {

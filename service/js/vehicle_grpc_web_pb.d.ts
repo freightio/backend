@@ -1,10 +1,10 @@
 import * as grpcWeb from 'grpc-web';
 import {
-  Empty,
   Price,
   Start,
   Vehicle,
-  VehicleList} from './vehicle_pb';
+  VehicleList,
+  Empty} from './vehicle_pb';
 
 export class VehiclesClient {
   constructor (hostname: string,
