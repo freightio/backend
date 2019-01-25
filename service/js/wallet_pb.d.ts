@@ -1,3 +1,6 @@
+import * as user_pb from './user_pb';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+
 export class Account {
   constructor ();
   getId(): string;
@@ -8,8 +11,8 @@ export class Account {
   setFee(a: number): void;
   getOrderid(): string;
   setOrderid(a: string): void;
-  getCreated(): number;
-  setCreated(a: number): void;
+  getCreated(): google_protobuf_timestamp_pb.Timestamp;
+  setCreated(a: google_protobuf_timestamp_pb.Timestamp): void;
   getAnnotationsList(): Account.AnnotationsEntry[];
   setAnnotationsList(a: Account.AnnotationsEntry[]): void;
   toObject(): Account.AsObject;
@@ -19,50 +22,32 @@ export class Account {
 
 export namespace Account {
   export type AsObject = {
-    Id: string;
-    Userid: string;
-    Fee: number;
-    Orderid: string;
-    Created: number;
-    AnnotationsList: Account.AnnotationsEntry[];
+    id: string;
+    userid: string;
+    fee: number;
+    orderid: string;
+    created: google_protobuf_timestamp_pb.Timestamp;
+    annotationsList: Account.AnnotationsEntry[];
   }
-  export type AnnotationsEntry = AccountAnnotationsEntry;
-}
 
-export class AccountAnnotationsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): AccountAnnotationsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => AccountAnnotationsEntry;
-}
-
-export namespace AccountAnnotationsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+  export class AnnotationsEntry {
+    constructor ();
+    getKey(): string;
+    setKey(a: string): void;
+    getValue(): string;
+    setValue(a: string): void;
+    toObject(): AnnotationsEntry.AsObject;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary: (bytes: {}) => AnnotationsEntry;
   }
-}
 
-export class AnnotationsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): AnnotationsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => AnnotationsEntry;
-}
-
-export namespace AnnotationsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+  export namespace AnnotationsEntry {
+    export type AsObject = {
+      key: string;
+      value: string;
+    }
   }
+
 }
 
 export class AccountList {
@@ -76,77 +61,7 @@ export class AccountList {
 
 export namespace AccountList {
   export type AsObject = {
-    ItemsList: Account[];
-  }
-}
-
-export class User {
-  constructor ();
-  getId(): string;
-  setId(a: string): void;
-  getName(): string;
-  setName(a: string): void;
-  getPassword(): string;
-  setPassword(a: string): void;
-  getTel(): string;
-  setTel(a: string): void;
-  getCreated(): number;
-  setCreated(a: number): void;
-  getSign(): string;
-  setSign(a: string): void;
-  getLabelsList(): User.LabelsEntry[];
-  setLabelsList(a: User.LabelsEntry[]): void;
-  toObject(): User.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => User;
-}
-
-export namespace User {
-  export type AsObject = {
-    Id: string;
-    Name: string;
-    Password: string;
-    Tel: string;
-    Created: number;
-    Sign: string;
-    LabelsList: User.LabelsEntry[];
-  }
-  export type LabelsEntry = UserLabelsEntry;
-}
-
-export class UserLabelsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): UserLabelsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => UserLabelsEntry;
-}
-
-export namespace UserLabelsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
-  }
-}
-
-export class LabelsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): LabelsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => LabelsEntry;
-}
-
-export namespace LabelsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+    itemsList: Account[];
   }
 }
 

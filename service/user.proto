@@ -2,6 +2,7 @@ syntax = "proto3";
 
 //import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 package backend;
 
@@ -28,7 +29,7 @@ message User {
   string name = 2;
   string password = 3;
   string tel = 4;
-  int64 created = 5;
+  google.protobuf.Timestamp created = 5;
   string sign = 6;
   map<string,string> labels = 7;
 }
@@ -47,5 +48,5 @@ message Certification {
   string name = 3;
   string imageData = 4;
   string status = 5;
-  int64 created = 6;
+  google.protobuf.Timestamp created = 6;
 }

@@ -1,3 +1,6 @@
+import * as user_pb from './user_pb';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+
 export class Order {
   constructor ();
   getId(): string;
@@ -14,8 +17,8 @@ export class Order {
   setSender(a: Sender): void;
   getAnnotationsList(): Order.AnnotationsEntry[];
   setAnnotationsList(a: Order.AnnotationsEntry[]): void;
-  getCreated(): number;
-  setCreated(a: number): void;
+  getCreated(): google_protobuf_timestamp_pb.Timestamp;
+  setCreated(a: google_protobuf_timestamp_pb.Timestamp): void;
   getDriverid(): string;
   setDriverid(a: string): void;
   getStatus(): string;
@@ -31,104 +34,38 @@ export class Order {
 
 export namespace Order {
   export type AsObject = {
-    Id: string;
-    Type: string;
-    From: Position;
-    TosList: Position[];
-    Fee: number;
-    Sender: Sender;
-    AnnotationsList: Order.AnnotationsEntry[];
-    Created: number;
-    Driverid: string;
-    Status: string;
-    Comment: string;
-    Payinfo: PayInfo;
+    id: string;
+    type: string;
+    from: Position;
+    tosList: Position[];
+    fee: number;
+    sender: Sender;
+    annotationsList: Order.AnnotationsEntry[];
+    created: google_protobuf_timestamp_pb.Timestamp;
+    driverid: string;
+    status: string;
+    comment: string;
+    payinfo: PayInfo;
   }
-  export type AnnotationsEntry = OrderAnnotationsEntry;
-}
 
-export class OrderAnnotationsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): OrderAnnotationsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => OrderAnnotationsEntry;
-}
-
-export namespace OrderAnnotationsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+  export class AnnotationsEntry {
+    constructor ();
+    getKey(): string;
+    setKey(a: string): void;
+    getValue(): string;
+    setValue(a: string): void;
+    toObject(): AnnotationsEntry.AsObject;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary: (bytes: {}) => AnnotationsEntry;
   }
-}
 
-export class AnnotationsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): AnnotationsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => AnnotationsEntry;
-}
-
-export namespace AnnotationsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+  export namespace AnnotationsEntry {
+    export type AsObject = {
+      key: string;
+      value: string;
+    }
   }
-}
 
-export class OrderList {
-  constructor ();
-  getItemsList(): Order[];
-  setItemsList(a: Order[]): void;
-  toObject(): OrderList.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => OrderList;
-}
-
-export namespace OrderList {
-  export type AsObject = {
-    ItemsList: Order[];
-  }
-}
-
-export class OrderRequest {
-  constructor ();
-  getId(): string;
-  setId(a: string): void;
-  toObject(): OrderRequest.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => OrderRequest;
-}
-
-export namespace OrderRequest {
-  export type AsObject = {
-    Id: string;
-  }
-}
-
-export class PayInfo {
-  constructor ();
-  getType(): string;
-  setType(a: string): void;
-  getPayresult(): string;
-  setPayresult(a: string): void;
-  toObject(): PayInfo.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => PayInfo;
-}
-
-export namespace PayInfo {
-  export type AsObject = {
-    Type: string;
-    Payresult: string;
-  }
 }
 
 export class Position {
@@ -146,9 +83,9 @@ export class Position {
 
 export namespace Position {
   export type AsObject = {
-    Name: string;
-    Location: string;
-    Address: string;
+    name: string;
+    location: string;
+    address: string;
   }
 }
 
@@ -167,9 +104,39 @@ export class Sender {
 
 export namespace Sender {
   export type AsObject = {
-    Id: string;
-    Name: string;
-    Tel: string;
+    id: string;
+    name: string;
+    tel: string;
+  }
+}
+
+export class OrderRequest {
+  constructor ();
+  getId(): string;
+  setId(a: string): void;
+  toObject(): OrderRequest.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => OrderRequest;
+}
+
+export namespace OrderRequest {
+  export type AsObject = {
+    id: string;
+  }
+}
+
+export class OrderList {
+  constructor ();
+  getItemsList(): Order[];
+  setItemsList(a: Order[]): void;
+  toObject(): OrderList.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => OrderList;
+}
+
+export namespace OrderList {
+  export type AsObject = {
+    itemsList: Order[];
   }
 }
 
@@ -184,77 +151,25 @@ export class SignReply {
 
 export namespace SignReply {
   export type AsObject = {
-    Signed: string;
+    signed: string;
   }
 }
 
-export class User {
+export class PayInfo {
   constructor ();
-  getId(): string;
-  setId(a: string): void;
-  getName(): string;
-  setName(a: string): void;
-  getPassword(): string;
-  setPassword(a: string): void;
-  getTel(): string;
-  setTel(a: string): void;
-  getCreated(): number;
-  setCreated(a: number): void;
-  getSign(): string;
-  setSign(a: string): void;
-  getLabelsList(): User.LabelsEntry[];
-  setLabelsList(a: User.LabelsEntry[]): void;
-  toObject(): User.AsObject;
+  getType(): string;
+  setType(a: string): void;
+  getPayresult(): string;
+  setPayresult(a: string): void;
+  toObject(): PayInfo.AsObject;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => User;
+  static deserializeBinary: (bytes: {}) => PayInfo;
 }
 
-export namespace User {
+export namespace PayInfo {
   export type AsObject = {
-    Id: string;
-    Name: string;
-    Password: string;
-    Tel: string;
-    Created: number;
-    Sign: string;
-    LabelsList: User.LabelsEntry[];
-  }
-  export type LabelsEntry = UserLabelsEntry;
-}
-
-export class UserLabelsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): UserLabelsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => UserLabelsEntry;
-}
-
-export namespace UserLabelsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
-  }
-}
-
-export class LabelsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): LabelsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => LabelsEntry;
-}
-
-export namespace LabelsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+    type: string;
+    payresult: string;
   }
 }
 

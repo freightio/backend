@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "user.proto";
+import "google/protobuf/timestamp.proto";
 
 package backend;
 
@@ -23,7 +24,7 @@ message Order {
   float fee = 5;
   Sender sender = 6;
   map<string,string> annotations = 7;
-  int64 created = 8;
+  google.protobuf.Timestamp created = 8;
   string driverId = 9;
   string status = 10;
   string comment = 11;

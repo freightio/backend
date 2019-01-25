@@ -1,10 +1,11 @@
 import * as grpcWeb from 'grpc-web';
+
+import * as user_pb from './user_pb';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+
 import {
   Account,
-  AnnotationsEntry,
-  AccountList,
-  User,
-  LabelsEntry} from './wallet_pb';
+  AccountList} from './wallet_pb';
 
 export class WalletsClient {
   constructor (hostname: string,
@@ -13,21 +14,21 @@ export class WalletsClient {
 
   add(
     request: Account,
-    metadata: grpcWeb.Metadata,
+    metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: Account) => void
   ): grpcWeb.ClientReadableStream<Account>;
 
   list(
-    request: User,
-    metadata: grpcWeb.Metadata,
+    request: user_pb.User,
+    metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: AccountList) => void
   ): grpcWeb.ClientReadableStream<AccountList>;
 
   total(
     request: Account,
-    metadata: grpcWeb.Metadata,
+    metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: Account) => void
   ): grpcWeb.ClientReadableStream<Account>;
@@ -41,17 +42,17 @@ export class WalletsPromiseClient {
 
   add(
     request: Account,
-    metadata: grpcWeb.Metadata
+    metadata?: grpcWeb.Metadata
   ): Promise<Account>;
 
   list(
-    request: User,
-    metadata: grpcWeb.Metadata
+    request: user_pb.User,
+    metadata?: grpcWeb.Metadata
   ): Promise<AccountList>;
 
   total(
     request: Account,
-    metadata: grpcWeb.Metadata
+    metadata?: grpcWeb.Metadata
   ): Promise<Account>;
 
 }

@@ -13,6 +13,8 @@ grpc.web = require('grpc-web');
 
 
 var user_pb = require('./user_pb.js')
+
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
 proto.backend = require('./wallet_pb.js');
 
@@ -93,7 +95,7 @@ const methodInfo_Wallets_Add = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.Account} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.Account)}
  *     callback The callback function(error, response)
@@ -105,7 +107,7 @@ proto.backend.WalletsClient.prototype.add =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Wallets/Add',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Wallets_Add,
       callback);
 };
@@ -114,16 +116,17 @@ proto.backend.WalletsClient.prototype.add =
 /**
  * @param {!proto.backend.Account} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Account>}
  *     The XHR Node Readable Stream
  */
 proto.backend.WalletsPromiseClient.prototype.add =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.add(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.add(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -149,7 +152,7 @@ const methodInfo_Wallets_List = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.AccountList)}
  *     callback The callback function(error, response)
@@ -161,7 +164,7 @@ proto.backend.WalletsClient.prototype.list =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Wallets/List',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Wallets_List,
       callback);
 };
@@ -170,16 +173,17 @@ proto.backend.WalletsClient.prototype.list =
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.AccountList>}
  *     The XHR Node Readable Stream
  */
 proto.backend.WalletsPromiseClient.prototype.list =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.list(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.list(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -205,7 +209,7 @@ const methodInfo_Wallets_Total = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.Account} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.Account)}
  *     callback The callback function(error, response)
@@ -217,7 +221,7 @@ proto.backend.WalletsClient.prototype.total =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Wallets/Total',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Wallets_Total,
       callback);
 };
@@ -226,16 +230,17 @@ proto.backend.WalletsClient.prototype.total =
 /**
  * @param {!proto.backend.Account} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Account>}
  *     The XHR Node Readable Stream
  */
 proto.backend.WalletsPromiseClient.prototype.total =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.total(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.total(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });

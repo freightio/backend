@@ -1,10 +1,8 @@
 import * as grpcWeb from 'grpc-web';
-import {
-  Price,
-  Start,
-  Vehicle,
-  VehicleList,
-  Empty} from './vehicle_pb';
+
+import * as google_protobuf_empty_pb from 'google-protobuf/google/protobuf/empty_pb';
+
+import {VehicleList} from './vehicle_pb';
 
 export class VehiclesClient {
   constructor (hostname: string,
@@ -12,8 +10,8 @@ export class VehiclesClient {
                options: null | { [index: string]: string; });
 
   list(
-    request: Empty,
-    metadata: grpcWeb.Metadata,
+    request: google_protobuf_empty_pb.Empty,
+    metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
                response: VehicleList) => void
   ): grpcWeb.ClientReadableStream<VehicleList>;
@@ -26,8 +24,8 @@ export class VehiclesPromiseClient {
                options: null | { [index: string]: string; });
 
   list(
-    request: Empty,
-    metadata: grpcWeb.Metadata
+    request: google_protobuf_empty_pb.Empty,
+    metadata?: grpcWeb.Metadata
   ): Promise<VehicleList>;
 
 }

@@ -12,6 +12,7 @@ var goog = jspb;
 var global = Function('return this')();
 
 var user_pb = require('./user_pb.js');
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.exportSymbol('proto.backend.Account', null, global);
 goog.exportSymbol('proto.backend.AccountList', null, global);
 
@@ -65,7 +66,7 @@ proto.backend.Account.toObject = function(includeInstance, msg) {
     userid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     fee: +jspb.Message.getFieldWithDefault(msg, 3, 0.0),
     orderid: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    created: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    created: (f = msg.getCreated()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     annotationsMap: (f = msg.getAnnotationsMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
@@ -120,13 +121,14 @@ proto.backend.Account.deserializeBinaryFromReader = function(msg, reader) {
       msg.setOrderid(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setCreated(value);
       break;
     case 6:
       var value = msg.getAnnotationsMap();
       reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "");
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString);
          });
       break;
     default:
@@ -187,10 +189,11 @@ proto.backend.Account.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getCreated();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f != null) {
+    writer.writeMessage(
       5,
-      f
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
   f = message.getAnnotationsMap(true);
@@ -261,17 +264,32 @@ proto.backend.Account.prototype.setOrderid = function(value) {
 
 
 /**
- * optional int64 created = 5;
- * @return {number}
+ * optional google.protobuf.Timestamp created = 5;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.backend.Account.prototype.getCreated = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 5));
 };
 
 
-/** @param {number} value */
+/** @param {?proto.google.protobuf.Timestamp|undefined} value */
 proto.backend.Account.prototype.setCreated = function(value) {
-  jspb.Message.setProto3IntField(this, 5, value);
+  jspb.Message.setWrapperField(this, 5, value);
+};
+
+
+proto.backend.Account.prototype.clearCreated = function() {
+  this.setCreated(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.backend.Account.prototype.hasCreated = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
@@ -432,15 +450,15 @@ proto.backend.AccountList.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * repeated Account items = 1;
- * @return {!Array<!proto.backend.Account>}
+ * @return {!Array.<!proto.backend.Account>}
  */
 proto.backend.AccountList.prototype.getItemsList = function() {
-  return /** @type{!Array<!proto.backend.Account>} */ (
+  return /** @type{!Array.<!proto.backend.Account>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.backend.Account, 1));
 };
 
 
-/** @param {!Array<!proto.backend.Account>} value */
+/** @param {!Array.<!proto.backend.Account>} value */
 proto.backend.AccountList.prototype.setItemsList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };

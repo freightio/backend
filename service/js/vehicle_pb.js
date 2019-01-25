@@ -831,15 +831,15 @@ proto.backend.VehicleList.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * repeated Vehicle items = 1;
- * @return {!Array<!proto.backend.Vehicle>}
+ * @return {!Array.<!proto.backend.Vehicle>}
  */
 proto.backend.VehicleList.prototype.getItemsList = function() {
-  return /** @type{!Array<!proto.backend.Vehicle>} */ (
+  return /** @type{!Array.<!proto.backend.Vehicle>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.backend.Vehicle, 1));
 };
 
 
-/** @param {!Array<!proto.backend.Vehicle>} value */
+/** @param {!Array.<!proto.backend.Vehicle>} value */
 proto.backend.VehicleList.prototype.setItemsList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };

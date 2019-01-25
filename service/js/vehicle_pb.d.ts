@@ -1,38 +1,4 @@
-export class Price {
-  constructor ();
-  getStart(): Start;
-  setStart(a: Start): void;
-  getThen(): number;
-  setThen(a: number): void;
-  toObject(): Price.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Price;
-}
-
-export namespace Price {
-  export type AsObject = {
-    Start: Start;
-    Then: number;
-  }
-}
-
-export class Start {
-  constructor ();
-  getDistance(): number;
-  setDistance(a: number): void;
-  getFee(): number;
-  setFee(a: number): void;
-  toObject(): Start.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Start;
-}
-
-export namespace Start {
-  export type AsObject = {
-    Distance: number;
-    Fee: number;
-  }
-}
+import * as google_protobuf_empty_pb from 'google-protobuf/google/protobuf/empty_pb';
 
 export class Vehicle {
   constructor ();
@@ -57,13 +23,49 @@ export class Vehicle {
 
 export namespace Vehicle {
   export type AsObject = {
-    Id: string;
-    Name: string;
-    Image: string;
-    Weight: string;
-    Lwh: string;
-    Cube: string;
-    Price: Price;
+    id: string;
+    name: string;
+    image: string;
+    weight: string;
+    lwh: string;
+    cube: string;
+    price: Price;
+  }
+}
+
+export class Price {
+  constructor ();
+  getStart(): Start;
+  setStart(a: Start): void;
+  getThen(): number;
+  setThen(a: number): void;
+  toObject(): Price.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => Price;
+}
+
+export namespace Price {
+  export type AsObject = {
+    start: Start;
+    then: number;
+  }
+}
+
+export class Start {
+  constructor ();
+  getDistance(): number;
+  setDistance(a: number): void;
+  getFee(): number;
+  setFee(a: number): void;
+  toObject(): Start.AsObject;
+  serializeBinary(): Uint8Array;
+  static deserializeBinary: (bytes: {}) => Start;
+}
+
+export namespace Start {
+  export type AsObject = {
+    distance: number;
+    fee: number;
   }
 }
 
@@ -78,19 +80,7 @@ export class VehicleList {
 
 export namespace VehicleList {
   export type AsObject = {
-    ItemsList: Vehicle[];
-  }
-}
-
-export class Empty {
-  constructor ();
-  toObject(): Empty.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Empty;
-}
-
-export namespace Empty {
-  export type AsObject = {
+    itemsList: Vehicle[];
   }
 }
 

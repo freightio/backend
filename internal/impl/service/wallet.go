@@ -2,10 +2,10 @@ package service
 
 import (
 	"context"
-	"time"
 
 	"github.com/freightio/backend/internal/impl/biz"
 	pb "github.com/freightio/backend/service"
+	"github.com/gogo/protobuf/types"
 )
 
 const (
@@ -15,8 +15,8 @@ const (
 type WalletServerImpl struct{}
 
 func (s *WalletServerImpl) Add(ctx context.Context, in *pb.Account) (*pb.Account, error) {
-	in.Id = time.Now().String()
-	in.Created = time.Now().Unix()
+	in.Id = types.TimestampNow().String()
+	in.Created = types.TimestampNow()
 	if err := biz.Insert(walletTable, in); err != nil {
 		return nil, err
 	}

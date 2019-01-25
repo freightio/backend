@@ -1,31 +1,56 @@
-export class Certification {
+import * as google_protobuf_wrappers_pb from 'google-protobuf/google/protobuf/wrappers_pb';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+
+export class User {
   constructor ();
   getId(): string;
   setId(a: string): void;
-  getUserid(): string;
-  setUserid(a: string): void;
   getName(): string;
   setName(a: string): void;
-  getImagedata(): string;
-  setImagedata(a: string): void;
-  getStatus(): string;
-  setStatus(a: string): void;
-  getCreated(): number;
-  setCreated(a: number): void;
-  toObject(): Certification.AsObject;
+  getPassword(): string;
+  setPassword(a: string): void;
+  getTel(): string;
+  setTel(a: string): void;
+  getCreated(): google_protobuf_timestamp_pb.Timestamp;
+  setCreated(a: google_protobuf_timestamp_pb.Timestamp): void;
+  getSign(): string;
+  setSign(a: string): void;
+  getLabelsList(): User.LabelsEntry[];
+  setLabelsList(a: User.LabelsEntry[]): void;
+  toObject(): User.AsObject;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Certification;
+  static deserializeBinary: (bytes: {}) => User;
 }
 
-export namespace Certification {
+export namespace User {
   export type AsObject = {
-    Id: string;
-    Userid: string;
-    Name: string;
-    Imagedata: string;
-    Status: string;
-    Created: number;
+    id: string;
+    name: string;
+    password: string;
+    tel: string;
+    created: google_protobuf_timestamp_pb.Timestamp;
+    sign: string;
+    labelsList: User.LabelsEntry[];
   }
+
+  export class LabelsEntry {
+    constructor ();
+    getKey(): string;
+    setKey(a: string): void;
+    getValue(): string;
+    setValue(a: string): void;
+    toObject(): LabelsEntry.AsObject;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary: (bytes: {}) => LabelsEntry;
+  }
+
+  export namespace LabelsEntry {
+    export type AsObject = {
+      key: string;
+      value: string;
+    }
+  }
+
 }
 
 export class IDRequest {
@@ -39,77 +64,7 @@ export class IDRequest {
 
 export namespace IDRequest {
   export type AsObject = {
-    Id: string;
-  }
-}
-
-export class User {
-  constructor ();
-  getId(): string;
-  setId(a: string): void;
-  getName(): string;
-  setName(a: string): void;
-  getPassword(): string;
-  setPassword(a: string): void;
-  getTel(): string;
-  setTel(a: string): void;
-  getCreated(): number;
-  setCreated(a: number): void;
-  getSign(): string;
-  setSign(a: string): void;
-  getLabelsList(): User.LabelsEntry[];
-  setLabelsList(a: User.LabelsEntry[]): void;
-  toObject(): User.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => User;
-}
-
-export namespace User {
-  export type AsObject = {
-    Id: string;
-    Name: string;
-    Password: string;
-    Tel: string;
-    Created: number;
-    Sign: string;
-    LabelsList: User.LabelsEntry[];
-  }
-  export type LabelsEntry = UserLabelsEntry;
-}
-
-export class UserLabelsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): UserLabelsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => UserLabelsEntry;
-}
-
-export namespace UserLabelsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
-  }
-}
-
-export class LabelsEntry {
-  constructor ();
-  getKey(): string;
-  setKey(a: string): void;
-  getValue(): string;
-  setValue(a: string): void;
-  toObject(): LabelsEntry.AsObject;
-  serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => LabelsEntry;
-}
-
-export namespace LabelsEntry {
-  export type AsObject = {
-    Key: string;
-    Value: string;
+    id: string;
   }
 }
 
@@ -124,22 +79,37 @@ export class UserList {
 
 export namespace UserList {
   export type AsObject = {
-    ItemsList: User[];
+    itemsList: User[];
   }
 }
 
-export class BoolValue {
+export class Certification {
   constructor ();
-  getValue(): boolean;
-  setValue(a: boolean): void;
-  toObject(): BoolValue.AsObject;
+  getId(): string;
+  setId(a: string): void;
+  getUserid(): string;
+  setUserid(a: string): void;
+  getName(): string;
+  setName(a: string): void;
+  getImagedata(): string;
+  setImagedata(a: string): void;
+  getStatus(): string;
+  setStatus(a: string): void;
+  getCreated(): google_protobuf_timestamp_pb.Timestamp;
+  setCreated(a: google_protobuf_timestamp_pb.Timestamp): void;
+  toObject(): Certification.AsObject;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => BoolValue;
+  static deserializeBinary: (bytes: {}) => Certification;
 }
 
-export namespace BoolValue {
+export namespace Certification {
   export type AsObject = {
-    Value: boolean;
+    id: string;
+    userid: string;
+    name: string;
+    imagedata: string;
+    status: string;
+    created: google_protobuf_timestamp_pb.Timestamp;
   }
 }
 

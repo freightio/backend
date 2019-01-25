@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 import "user.proto";
-//import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 package backend;
 
@@ -16,7 +16,7 @@ message Account {
   string userId = 2;
   float fee = 3; 
   string orderId = 4;
-  int64 created = 5;
+  google.protobuf.Timestamp created = 5;
   map<string,string> annotations = 6;  
 }
 

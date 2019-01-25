@@ -93,7 +93,7 @@ const methodInfo_Vehicles_List = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.google.protobuf.Empty} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.VehicleList)}
  *     callback The callback function(error, response)
@@ -105,7 +105,7 @@ proto.backend.VehiclesClient.prototype.list =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Vehicles/List',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Vehicles_List,
       callback);
 };
@@ -114,16 +114,17 @@ proto.backend.VehiclesClient.prototype.list =
 /**
  * @param {!proto.google.protobuf.Empty} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.VehicleList>}
  *     The XHR Node Readable Stream
  */
 proto.backend.VehiclesPromiseClient.prototype.list =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.list(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.list(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });

@@ -13,6 +13,8 @@ grpc.web = require('grpc-web');
 
 
 var google_protobuf_wrappers_pb = require('google-protobuf/google/protobuf/wrappers_pb.js')
+
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
 proto.backend = require('./user_pb.js');
 
@@ -93,7 +95,7 @@ const methodInfo_Users_Add = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.User)}
  *     callback The callback function(error, response)
@@ -105,7 +107,7 @@ proto.backend.UsersClient.prototype.add =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/Add',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_Add,
       callback);
 };
@@ -114,16 +116,17 @@ proto.backend.UsersClient.prototype.add =
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.add =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.add(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.add(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -149,7 +152,7 @@ const methodInfo_Users_Get = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.IDRequest} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.User)}
  *     callback The callback function(error, response)
@@ -161,7 +164,7 @@ proto.backend.UsersClient.prototype.get =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/Get',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_Get,
       callback);
 };
@@ -170,16 +173,17 @@ proto.backend.UsersClient.prototype.get =
 /**
  * @param {!proto.backend.IDRequest} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.get =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.get(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.get(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -205,7 +209,7 @@ const methodInfo_Users_Update = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.User)}
  *     callback The callback function(error, response)
@@ -217,7 +221,7 @@ proto.backend.UsersClient.prototype.update =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/Update',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_Update,
       callback);
 };
@@ -226,16 +230,17 @@ proto.backend.UsersClient.prototype.update =
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.update =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.update(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.update(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -261,7 +266,7 @@ const methodInfo_Users_List = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.UserList)}
  *     callback The callback function(error, response)
@@ -273,7 +278,7 @@ proto.backend.UsersClient.prototype.list =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/List',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_List,
       callback);
 };
@@ -282,16 +287,17 @@ proto.backend.UsersClient.prototype.list =
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.UserList>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.list =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.list(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.list(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -317,7 +323,7 @@ const methodInfo_Users_Delete = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.IDRequest} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.User)}
  *     callback The callback function(error, response)
@@ -329,7 +335,7 @@ proto.backend.UsersClient.prototype.delete =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/Delete',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_Delete,
       callback);
 };
@@ -338,16 +344,17 @@ proto.backend.UsersClient.prototype.delete =
 /**
  * @param {!proto.backend.IDRequest} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.delete =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.delete(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.delete(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -373,7 +380,7 @@ const methodInfo_Users_Login = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.User)}
  *     callback The callback function(error, response)
@@ -385,7 +392,7 @@ proto.backend.UsersClient.prototype.login =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/Login',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_Login,
       callback);
 };
@@ -394,16 +401,17 @@ proto.backend.UsersClient.prototype.login =
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.login =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.login(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.login(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -429,7 +437,7 @@ const methodInfo_Users_Sign = new grpc.web.AbstractClientBase.MethodInfo(
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.User)}
  *     callback The callback function(error, response)
@@ -441,7 +449,7 @@ proto.backend.UsersClient.prototype.sign =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Users/Sign',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Users_Sign,
       callback);
 };
@@ -450,16 +458,17 @@ proto.backend.UsersClient.prototype.sign =
 /**
  * @param {!proto.backend.User} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.sign =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.sign(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.sign(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -543,7 +552,7 @@ const methodInfo_Certifications_Add = new grpc.web.AbstractClientBase.MethodInfo
 /**
  * @param {!proto.backend.Certification} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.Certification)}
  *     callback The callback function(error, response)
@@ -555,7 +564,7 @@ proto.backend.CertificationsClient.prototype.add =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Certifications/Add',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Certifications_Add,
       callback);
 };
@@ -564,16 +573,17 @@ proto.backend.CertificationsClient.prototype.add =
 /**
  * @param {!proto.backend.Certification} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Certification>}
  *     The XHR Node Readable Stream
  */
 proto.backend.CertificationsPromiseClient.prototype.add =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.add(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.add(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -599,7 +609,7 @@ const methodInfo_Certifications_Update = new grpc.web.AbstractClientBase.MethodI
 /**
  * @param {!proto.backend.Certification} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.backend.Certification)}
  *     callback The callback function(error, response)
@@ -611,7 +621,7 @@ proto.backend.CertificationsClient.prototype.update =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Certifications/Update',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Certifications_Update,
       callback);
 };
@@ -620,16 +630,17 @@ proto.backend.CertificationsClient.prototype.update =
 /**
  * @param {!proto.backend.Certification} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Certification>}
  *     The XHR Node Readable Stream
  */
 proto.backend.CertificationsPromiseClient.prototype.update =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.update(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.update(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });
@@ -654,7 +665,7 @@ const methodInfo_Certifications_List = new grpc.web.AbstractClientBase.MethodInf
 
 /**
  * @param {!proto.backend.Certification} request The request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.backend.Certification>}
  *     The XHR Node Readable Stream
@@ -671,7 +682,7 @@ proto.backend.CertificationsClient.prototype.list =
 
 /**
  * @param {!proto.backend.Certification} request The request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.backend.Certification>}
  *     The XHR Node Readable Stream
@@ -705,7 +716,7 @@ const methodInfo_Certifications_Verify = new grpc.web.AbstractClientBase.MethodI
 /**
  * @param {!proto.backend.IDRequest} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.Error, ?proto.google.protobuf.BoolValue)}
  *     callback The callback function(error, response)
@@ -717,7 +728,7 @@ proto.backend.CertificationsClient.prototype.verify =
   return this.client_.rpcCall(this.hostname_ +
       '/backend.Certifications/Verify',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Certifications_Verify,
       callback);
 };
@@ -726,16 +737,17 @@ proto.backend.CertificationsClient.prototype.verify =
 /**
  * @param {!proto.backend.IDRequest} request The
  *     request proto
- * @param {!Object<string, string>} metadata User defined
+ * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.google.protobuf.BoolValue>}
  *     The XHR Node Readable Stream
  */
 proto.backend.CertificationsPromiseClient.prototype.verify =
     function(request, metadata) {
-  return new Promise((resolve, reject) => {
-    this.delegateClient_.verify(
-      request, metadata, (error, response) => {
+  var _this = this;
+  return new Promise(function (resolve, reject) {
+    _this.delegateClient_.verify(
+      request, metadata, function (error, response) {
         error ? reject(error) : resolve(response);
       });
   });

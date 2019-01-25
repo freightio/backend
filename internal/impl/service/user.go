@@ -5,6 +5,7 @@ import (
 
 	"github.com/freightio/backend/internal/impl/biz"
 	pb "github.com/freightio/backend/service"
+	"github.com/gogo/protobuf/types"
 )
 
 const (
@@ -15,6 +16,7 @@ type UserServerImpl struct{}
 
 func (s *UserServerImpl) Add(ctx context.Context, in *pb.User) (*pb.User, error) {
 	in.Id = in.Tel //time.Now().String()
+	in.Created = types.TimestampNow()
 	if err := biz.Insert(userTable, in); err != nil {
 		return nil, err
 	}
