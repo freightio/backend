@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"github.com/freightio/backend/internal/impl/biz"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -43,20 +44,24 @@ func auth(ctx context.Context) error {
 		return status.Errorf(codes.InvalidArgument, "Retrieving metadata is failed")
 	}
 	log.Println(md)
-	// authHeader, ok := md["authorization"]
-	// if !ok {
-	// 	return status.Errorf(codes.Unauthenticated, "Authorization token is not supplied")
-	// }
+	authHeader, ok := md["authorization-token"]
+	if !ok {
+		return status.Errorf(codes.Unauthenticated, "Authorization token is required")
+	}
 
-	// token := authHeader[0]
-	// if err := validateToken(token); err != nil {
-	// 	return err
-	// }
+	token := authHeader[0]
+	if err := validateToken(token); err != nil {
+		return err
+	}
 
 	return nil
 }
 
-//TODO
 func validateToken(token string) error {
-	return nil
+	for _, v := range biz.TOKENS {
+		if token == v {
+			return nil
+		}
+	}
+	return status.Errorf(codes.PermissionDenied, "Authorization is denied")
 }
