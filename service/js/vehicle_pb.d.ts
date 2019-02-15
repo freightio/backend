@@ -1,24 +1,30 @@
+import * as jspb from "google-protobuf"
+
 import * as google_protobuf_empty_pb from 'google-protobuf/google/protobuf/empty_pb';
 
-export class Vehicle {
+export class Vehicle extends jspb.Message {
   constructor ();
   getId(): string;
-  setId(a: string): void;
+  setId(value: string): void;
   getName(): string;
-  setName(a: string): void;
+  setName(value: string): void;
   getImage(): string;
-  setImage(a: string): void;
+  setImage(value: string): void;
   getWeight(): string;
-  setWeight(a: string): void;
+  setWeight(value: string): void;
   getLwh(): string;
-  setLwh(a: string): void;
+  setLwh(value: string): void;
   getCube(): string;
-  setCube(a: string): void;
-  getPrice(): Price;
-  setPrice(a: Price): void;
-  toObject(): Vehicle.AsObject;
+  setCube(value: string): void;
+  getPrice(): Price | undefined;
+  setPrice(value?: Price): void;
+  clearPrice(): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Vehicle;
+  toObject(includeInstance?: boolean): Vehicle.AsObject;
+  static toObject(includeInstance: boolean, msg: Vehicle): Vehicle.AsObject;
+  static serializeBinaryToWriter(message: Vehicle, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Vehicle;
+  static deserializeBinaryFromReader(message: Vehicle, reader: jspb.BinaryReader): Vehicle;
 }
 
 export namespace Vehicle {
@@ -29,37 +35,44 @@ export namespace Vehicle {
     weight: string;
     lwh: string;
     cube: string;
-    price: Price;
+    price?: Price.AsObject;
   }
 }
 
-export class Price {
+export class Price extends jspb.Message {
   constructor ();
-  getStart(): Start;
-  setStart(a: Start): void;
+  getStart(): Start | undefined;
+  setStart(value?: Start): void;
+  clearStart(): void;
   getThen(): number;
-  setThen(a: number): void;
-  toObject(): Price.AsObject;
+  setThen(value: number): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Price;
+  toObject(includeInstance?: boolean): Price.AsObject;
+  static toObject(includeInstance: boolean, msg: Price): Price.AsObject;
+  static serializeBinaryToWriter(message: Price, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Price;
+  static deserializeBinaryFromReader(message: Price, reader: jspb.BinaryReader): Price;
 }
 
 export namespace Price {
   export type AsObject = {
-    start: Start;
+    start?: Start.AsObject;
     then: number;
   }
 }
 
-export class Start {
+export class Start extends jspb.Message {
   constructor ();
   getDistance(): number;
-  setDistance(a: number): void;
+  setDistance(value: number): void;
   getFee(): number;
-  setFee(a: number): void;
-  toObject(): Start.AsObject;
+  setFee(value: number): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Start;
+  toObject(includeInstance?: boolean): Start.AsObject;
+  static toObject(includeInstance: boolean, msg: Start): Start.AsObject;
+  static serializeBinaryToWriter(message: Start, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Start;
+  static deserializeBinaryFromReader(message: Start, reader: jspb.BinaryReader): Start;
 }
 
 export namespace Start {
@@ -69,18 +82,22 @@ export namespace Start {
   }
 }
 
-export class VehicleList {
+export class VehicleList extends jspb.Message {
   constructor ();
-  getItemsList(): Vehicle[];
-  setItemsList(a: Vehicle[]): void;
-  toObject(): VehicleList.AsObject;
+  getItemsList(): Vehicle[] | undefined;
+  setItemsList(value?: Vehicle[]): void;
+  clearItemsList(): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => VehicleList;
+  toObject(includeInstance?: boolean): VehicleList.AsObject;
+  static toObject(includeInstance: boolean, msg: VehicleList): VehicleList.AsObject;
+  static serializeBinaryToWriter(message: VehicleList, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): VehicleList;
+  static deserializeBinaryFromReader(message: VehicleList, reader: jspb.BinaryReader): VehicleList;
 }
 
 export namespace VehicleList {
   export type AsObject = {
-    itemsList: Vehicle[];
+    itemsList?: Vehicle.AsObject[];
   }
 }
 

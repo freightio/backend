@@ -1,25 +1,31 @@
+import * as jspb from "google-protobuf"
+
 import * as google_protobuf_wrappers_pb from 'google-protobuf/google/protobuf/wrappers_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
-export class User {
+export class User extends jspb.Message {
   constructor ();
   getId(): string;
-  setId(a: string): void;
+  setId(value: string): void;
   getName(): string;
-  setName(a: string): void;
+  setName(value: string): void;
   getPassword(): string;
-  setPassword(a: string): void;
+  setPassword(value: string): void;
   getTel(): string;
-  setTel(a: string): void;
-  getCreated(): google_protobuf_timestamp_pb.Timestamp;
-  setCreated(a: google_protobuf_timestamp_pb.Timestamp): void;
+  setTel(value: string): void;
+  getCreated(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setCreated(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  clearCreated(): void;
   getSign(): string;
-  setSign(a: string): void;
-  getLabelsList(): User.LabelsEntry[];
-  setLabelsList(a: User.LabelsEntry[]): void;
-  toObject(): User.AsObject;
+  setSign(value: string): void;
+  getLabelsMap(): jspb.Map<string, string> | undefined;
+  clearLabelsMap(): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => User;
+  toObject(includeInstance?: boolean): User.AsObject;
+  static toObject(includeInstance: boolean, msg: User): User.AsObject;
+  static serializeBinaryToWriter(message: User, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): User;
+  static deserializeBinaryFromReader(message: User, reader: jspb.BinaryReader): User;
 }
 
 export namespace User {
@@ -28,20 +34,23 @@ export namespace User {
     name: string;
     password: string;
     tel: string;
-    created: google_protobuf_timestamp_pb.Timestamp;
+    created?: google_protobuf_timestamp_pb.Timestamp.AsObject;
     sign: string;
-    labelsList: User.LabelsEntry[];
+    labelsMap?: User.LabelsEntry.AsObject[];
   }
 
-  export class LabelsEntry {
+  export class LabelsEntry extends jspb.Message {
     constructor ();
     getKey(): string;
-    setKey(a: string): void;
+    setKey(value: string): void;
     getValue(): string;
-    setValue(a: string): void;
-    toObject(): LabelsEntry.AsObject;
+    setValue(value: string): void;
     serializeBinary(): Uint8Array;
-    static deserializeBinary: (bytes: {}) => LabelsEntry;
+    toObject(includeInstance?: boolean): LabelsEntry.AsObject;
+    static toObject(includeInstance: boolean, msg: LabelsEntry): LabelsEntry.AsObject;
+    static serializeBinaryToWriter(message: LabelsEntry, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): LabelsEntry;
+    static deserializeBinaryFromReader(message: LabelsEntry, reader: jspb.BinaryReader): LabelsEntry;
   }
 
   export namespace LabelsEntry {
@@ -53,13 +62,16 @@ export namespace User {
 
 }
 
-export class IDRequest {
+export class IDRequest extends jspb.Message {
   constructor ();
   getId(): string;
-  setId(a: string): void;
-  toObject(): IDRequest.AsObject;
+  setId(value: string): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => IDRequest;
+  toObject(includeInstance?: boolean): IDRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: IDRequest): IDRequest.AsObject;
+  static serializeBinaryToWriter(message: IDRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): IDRequest;
+  static deserializeBinaryFromReader(message: IDRequest, reader: jspb.BinaryReader): IDRequest;
 }
 
 export namespace IDRequest {
@@ -68,38 +80,46 @@ export namespace IDRequest {
   }
 }
 
-export class UserList {
+export class UserList extends jspb.Message {
   constructor ();
-  getItemsList(): User[];
-  setItemsList(a: User[]): void;
-  toObject(): UserList.AsObject;
+  getItemsList(): User[] | undefined;
+  setItemsList(value?: User[]): void;
+  clearItemsList(): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => UserList;
+  toObject(includeInstance?: boolean): UserList.AsObject;
+  static toObject(includeInstance: boolean, msg: UserList): UserList.AsObject;
+  static serializeBinaryToWriter(message: UserList, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UserList;
+  static deserializeBinaryFromReader(message: UserList, reader: jspb.BinaryReader): UserList;
 }
 
 export namespace UserList {
   export type AsObject = {
-    itemsList: User[];
+    itemsList?: User.AsObject[];
   }
 }
 
-export class Certification {
+export class Certification extends jspb.Message {
   constructor ();
   getId(): string;
-  setId(a: string): void;
+  setId(value: string): void;
   getUserid(): string;
-  setUserid(a: string): void;
+  setUserid(value: string): void;
   getName(): string;
-  setName(a: string): void;
+  setName(value: string): void;
   getImagedata(): string;
-  setImagedata(a: string): void;
+  setImagedata(value: string): void;
   getStatus(): string;
-  setStatus(a: string): void;
-  getCreated(): google_protobuf_timestamp_pb.Timestamp;
-  setCreated(a: google_protobuf_timestamp_pb.Timestamp): void;
-  toObject(): Certification.AsObject;
+  setStatus(value: string): void;
+  getCreated(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setCreated(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  clearCreated(): void;
   serializeBinary(): Uint8Array;
-  static deserializeBinary: (bytes: {}) => Certification;
+  toObject(includeInstance?: boolean): Certification.AsObject;
+  static toObject(includeInstance: boolean, msg: Certification): Certification.AsObject;
+  static serializeBinaryToWriter(message: Certification, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Certification;
+  static deserializeBinaryFromReader(message: Certification, reader: jspb.BinaryReader): Certification;
 }
 
 export namespace Certification {
@@ -109,7 +129,7 @@ export namespace Certification {
     name: string;
     imagedata: string;
     status: string;
-    created: google_protobuf_timestamp_pb.Timestamp;
+    created?: google_protobuf_timestamp_pb.Timestamp.AsObject;
   }
 }
 

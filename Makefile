@@ -20,8 +20,8 @@ prepare:
 #	go install github.com/freightio/api-gateway/plugin/...
 	go get github.com/gogo/protobuf/protoc-gen-gogofaster
 #	go get github.com/golang/protobuf/protoc-gen-go
-	@-docker swarm init > /dev/null 2>&1  || true
-	@-docker network create --driver=overlay devel > /dev/null 2>&1  || true
+	@-docker swarm init
+	@-docker network create --driver=overlay devel
 
 generate:generate-js generate-go
 
@@ -60,8 +60,8 @@ run:image
 	@docker service create --name $(SERVICE) --network devel $(IMG_HUB)/$(SERVICE):$(TAG)
 
 envoy:
-	docker build -t $(IMG_HUB)/envoy:latest -f envoy.Dockerfile .
-	docker service create --name envoy --network devel -p 8080:8080 $(IMG_HUB)/envoy:latest
+	docker build -t $(IMG_HUB)/envoy:$(TAG) -f envoy.Dockerfile .
+	docker service create --name envoy --network devel -p 8080:8080 $(IMG_HUB)/envoy:$(TAG)
 
 mysql:
 	-docker service create --name mysql --network devel --mount type=bind,source=/home/daniel/.mysqldata,destination=/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=freight mysql:5.7.24
