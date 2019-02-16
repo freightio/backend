@@ -46,7 +46,7 @@ generate-js:
 	cp -rf service/js/* ../client/src/sdk
 	@echo Generate-js successfully.
 
-build:prepare generate-go
+build:#prepare generate-go
 	go build -ldflags='-linkmode external -extldflags -static $(LD_FLAGS)' -o bundles/$(SERVICE) internal/cmd/*.go
 
 image:build
