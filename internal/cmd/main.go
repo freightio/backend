@@ -1,11 +1,11 @@
 package main
 
 import (
-	impl "backend/internal/impl/service"
-	pb "backend/service"
 	"log"
 	"net"
 
+	impl "github.com/freightio/backend/internal/impl/service"
+	pb "github.com/freightio/backend/service"
 	"google.golang.org/grpc"
 )
 

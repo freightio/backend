@@ -1,10 +1,10 @@
 package service
 
 import (
-	"backend/internal/impl/biz"
-	pb "backend/service"
 	"context"
 
+	"github.com/freightio/backend/internal/impl/biz"
+	pb "github.com/freightio/backend/service"
 	"github.com/gogo/protobuf/types"
 )
 

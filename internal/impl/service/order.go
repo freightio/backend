@@ -1,11 +1,12 @@
 package service
 
 import (
-	"backend/internal/impl/biz"
-	pb "backend/service"
 	"context"
 	"strings"
 	"time"
+
+	"github.com/freightio/backend/internal/impl/biz"
+	pb "github.com/freightio/backend/service"
 )
 
 const (

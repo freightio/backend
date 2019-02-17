@@ -15,6 +15,8 @@ import (
 	"net/url"
 	"sort"
 	"time"
+
+	"github.com/jmzwcn/authz/key"
 )
 
 type BizContent struct {
@@ -81,7 +83,7 @@ func sign(m url.Values) string {
 }
 
 func rsaEncrypt(origData []byte) ([]byte, error) {
-	block, _ := pem.Decode([]byte(private_key))
+	block, _ := pem.Decode([]byte(key.PRIVATE_KEY))
 	if block == nil {
 		fmt.Println("block空")
 		return nil, nil
