@@ -77,20 +77,20 @@ func sign(m url.Values) string {
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println("加密：", b)
-	fmt.Println("base加密：", base64.StdEncoding.EncodeToString(b))
+	log.Println("加密：", b)
+	log.Println("base加密：", base64.StdEncoding.EncodeToString(b))
 	return base64.StdEncoding.EncodeToString(b)
 }
 
 func rsaEncrypt(origData []byte) ([]byte, error) {
 	block, _ := pem.Decode([]byte(key.PRIVATE_KEY))
 	if block == nil {
-		fmt.Println("block空")
+		log.Println("block空")
 		return nil, nil
 	}
 	priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
-		fmt.Println("无法还原私钥")
+		log.Println("无法还原私钥", err)
 		return nil, nil
 	}
 	h2 := sha256.New()
