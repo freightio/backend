@@ -3,22 +3,29 @@ import * as jspb from "google-protobuf"
 import * as google_protobuf_empty_pb from 'google-protobuf/google/protobuf/empty_pb';
 
 export class Vehicle extends jspb.Message {
-  constructor ();
   getId(): string;
   setId(value: string): void;
+
   getName(): string;
   setName(value: string): void;
+
   getImage(): string;
   setImage(value: string): void;
+
   getWeight(): string;
   setWeight(value: string): void;
+
   getLwh(): string;
   setLwh(value: string): void;
+
   getCube(): string;
   setCube(value: string): void;
+
   getPrice(): Price | undefined;
   setPrice(value?: Price): void;
+  hasPrice(): boolean;
   clearPrice(): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Vehicle.AsObject;
   static toObject(includeInstance: boolean, msg: Vehicle): Vehicle.AsObject;
@@ -29,23 +36,25 @@ export class Vehicle extends jspb.Message {
 
 export namespace Vehicle {
   export type AsObject = {
-    id: string;
-    name: string;
-    image: string;
-    weight: string;
-    lwh: string;
-    cube: string;
-    price?: Price.AsObject;
+    id: string,
+    name: string,
+    image: string,
+    weight: string,
+    lwh: string,
+    cube: string,
+    price?: Price.AsObject,
   }
 }
 
 export class Price extends jspb.Message {
-  constructor ();
   getStart(): Start | undefined;
   setStart(value?: Start): void;
+  hasStart(): boolean;
   clearStart(): void;
+
   getThen(): number;
   setThen(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Price.AsObject;
   static toObject(includeInstance: boolean, msg: Price): Price.AsObject;
@@ -56,17 +65,18 @@ export class Price extends jspb.Message {
 
 export namespace Price {
   export type AsObject = {
-    start?: Start.AsObject;
-    then: number;
+    start?: Start.AsObject,
+    then: number,
   }
 }
 
 export class Start extends jspb.Message {
-  constructor ();
   getDistance(): number;
   setDistance(value: number): void;
+
   getFee(): number;
   setFee(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Start.AsObject;
   static toObject(includeInstance: boolean, msg: Start): Start.AsObject;
@@ -77,16 +87,17 @@ export class Start extends jspb.Message {
 
 export namespace Start {
   export type AsObject = {
-    distance: number;
-    fee: number;
+    distance: number,
+    fee: number,
   }
 }
 
 export class VehicleList extends jspb.Message {
-  constructor ();
-  getItemsList(): Vehicle[] | undefined;
-  setItemsList(value?: Vehicle[]): void;
+  getItemsList(): Array<Vehicle>;
+  setItemsList(value: Array<Vehicle>): void;
   clearItemsList(): void;
+  addItems(value?: Vehicle, index?: number): Vehicle;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): VehicleList.AsObject;
   static toObject(includeInstance: boolean, msg: VehicleList): VehicleList.AsObject;
@@ -97,7 +108,7 @@ export class VehicleList extends jspb.Message {
 
 export namespace VehicleList {
   export type AsObject = {
-    itemsList?: Vehicle.AsObject[];
+    itemsList: Array<Vehicle.AsObject>,
   }
 }
 

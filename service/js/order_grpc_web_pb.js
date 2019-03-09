@@ -68,11 +68,25 @@ proto.backend.OrdersPromiseClient =
   options['format'] = 'text';
 
   /**
-   * @private @const {!proto.backend.OrdersClient} The delegate callback based client
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
    */
-  this.delegateClient_ = new proto.backend.OrdersClient(
-      hostname, credentials, options);
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
+
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 
@@ -119,17 +133,15 @@ proto.backend.OrdersClient.prototype.add =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Order>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.add =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.add(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Orders/Add',
+      request,
+      metadata || {},
+      methodInfo_Orders_Add);
 };
 
 
@@ -176,17 +188,15 @@ proto.backend.OrdersClient.prototype.get =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Order>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.get =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.get(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Orders/Get',
+      request,
+      metadata || {},
+      methodInfo_Orders_Get);
 };
 
 
@@ -233,17 +243,15 @@ proto.backend.OrdersClient.prototype.update =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Order>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.update =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.update(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Orders/Update',
+      request,
+      metadata || {},
+      methodInfo_Orders_Update);
 };
 
 
@@ -290,17 +298,15 @@ proto.backend.OrdersClient.prototype.delete =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Order>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.delete =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.delete(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Orders/Delete',
+      request,
+      metadata || {},
+      methodInfo_Orders_Delete);
 };
 
 
@@ -332,7 +338,7 @@ proto.backend.OrdersClient.prototype.listByPositon =
   return this.client_.serverStreaming(this.hostname_ +
       '/backend.Orders/ListByPositon',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Orders_ListByPositon);
 };
 
@@ -346,10 +352,10 @@ proto.backend.OrdersClient.prototype.listByPositon =
  */
 proto.backend.OrdersPromiseClient.prototype.listByPositon =
     function(request, metadata) {
-  return this.delegateClient_.client_.serverStreaming(this.delegateClient_.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Orders/ListByPositon',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Orders_ListByPositon);
 };
 
@@ -397,17 +403,15 @@ proto.backend.OrdersClient.prototype.listByUser =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.OrderList>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.listByUser =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.listByUser(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Orders/ListByUser',
+      request,
+      metadata || {},
+      methodInfo_Orders_ListByUser);
 };
 
 
@@ -454,17 +458,15 @@ proto.backend.OrdersClient.prototype.signAlipay =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.SignReply>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.signAlipay =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.signAlipay(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Orders/SignAlipay',
+      request,
+      metadata || {},
+      methodInfo_Orders_SignAlipay);
 };
 
 

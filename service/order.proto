@@ -23,12 +23,13 @@ message Order {
   repeated Position tos = 4;
   float fee = 5;
   Sender sender = 6;
-  map<string,string> annotations = 7;
-  google.protobuf.Timestamp created = 8;
+  google.protobuf.Timestamp start = 13;
   string driverId = 9;
   string status = 10;
   string comment = 11;
   PayInfo payInfo = 12;
+  map<string,string> annotations = 7;
+  google.protobuf.Timestamp created = 8;
 }
 
 message Position {

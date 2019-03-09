@@ -68,11 +68,25 @@ proto.backend.WalletsPromiseClient =
   options['format'] = 'text';
 
   /**
-   * @private @const {!proto.backend.WalletsClient} The delegate callback based client
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
    */
-  this.delegateClient_ = new proto.backend.WalletsClient(
-      hostname, credentials, options);
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
+
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 
@@ -119,17 +133,15 @@ proto.backend.WalletsClient.prototype.add =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Account>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.WalletsPromiseClient.prototype.add =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.add(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Wallets/Add',
+      request,
+      metadata || {},
+      methodInfo_Wallets_Add);
 };
 
 
@@ -176,17 +188,15 @@ proto.backend.WalletsClient.prototype.list =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.AccountList>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.WalletsPromiseClient.prototype.list =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.list(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Wallets/List',
+      request,
+      metadata || {},
+      methodInfo_Wallets_List);
 };
 
 
@@ -233,17 +243,15 @@ proto.backend.WalletsClient.prototype.total =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Account>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.WalletsPromiseClient.prototype.total =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.total(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Wallets/Total',
+      request,
+      metadata || {},
+      methodInfo_Wallets_Total);
 };
 
 

@@ -68,11 +68,25 @@ proto.backend.UsersPromiseClient =
   options['format'] = 'text';
 
   /**
-   * @private @const {!proto.backend.UsersClient} The delegate callback based client
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
    */
-  this.delegateClient_ = new proto.backend.UsersClient(
-      hostname, credentials, options);
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
+
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 
@@ -119,17 +133,15 @@ proto.backend.UsersClient.prototype.add =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.add =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.add(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/Add',
+      request,
+      metadata || {},
+      methodInfo_Users_Add);
 };
 
 
@@ -176,17 +188,15 @@ proto.backend.UsersClient.prototype.get =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.get =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.get(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/Get',
+      request,
+      metadata || {},
+      methodInfo_Users_Get);
 };
 
 
@@ -233,17 +243,15 @@ proto.backend.UsersClient.prototype.update =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.update =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.update(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/Update',
+      request,
+      metadata || {},
+      methodInfo_Users_Update);
 };
 
 
@@ -290,17 +298,15 @@ proto.backend.UsersClient.prototype.list =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.UserList>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.list =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.list(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/List',
+      request,
+      metadata || {},
+      methodInfo_Users_List);
 };
 
 
@@ -347,17 +353,15 @@ proto.backend.UsersClient.prototype.delete =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.delete =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.delete(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/Delete',
+      request,
+      metadata || {},
+      methodInfo_Users_Delete);
 };
 
 
@@ -404,17 +408,15 @@ proto.backend.UsersClient.prototype.login =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.login =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.login(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/Login',
+      request,
+      metadata || {},
+      methodInfo_Users_Login);
 };
 
 
@@ -461,17 +463,15 @@ proto.backend.UsersClient.prototype.sign =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.User>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.UsersPromiseClient.prototype.sign =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.sign(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Users/Sign',
+      request,
+      metadata || {},
+      methodInfo_Users_Sign);
 };
 
 
@@ -525,11 +525,25 @@ proto.backend.CertificationsPromiseClient =
   options['format'] = 'text';
 
   /**
-   * @private @const {!proto.backend.CertificationsClient} The delegate callback based client
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
    */
-  this.delegateClient_ = new proto.backend.CertificationsClient(
-      hostname, credentials, options);
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
+
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 
@@ -576,17 +590,15 @@ proto.backend.CertificationsClient.prototype.add =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Certification>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.CertificationsPromiseClient.prototype.add =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.add(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Certifications/Add',
+      request,
+      metadata || {},
+      methodInfo_Certifications_Add);
 };
 
 
@@ -633,17 +645,15 @@ proto.backend.CertificationsClient.prototype.update =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.backend.Certification>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.CertificationsPromiseClient.prototype.update =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.update(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Certifications/Update',
+      request,
+      metadata || {},
+      methodInfo_Certifications_Update);
 };
 
 
@@ -675,7 +685,7 @@ proto.backend.CertificationsClient.prototype.list =
   return this.client_.serverStreaming(this.hostname_ +
       '/backend.Certifications/List',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Certifications_List);
 };
 
@@ -689,10 +699,10 @@ proto.backend.CertificationsClient.prototype.list =
  */
 proto.backend.CertificationsPromiseClient.prototype.list =
     function(request, metadata) {
-  return this.delegateClient_.client_.serverStreaming(this.delegateClient_.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Certifications/List',
       request,
-      metadata,
+      metadata || {},
       methodInfo_Certifications_List);
 };
 
@@ -740,17 +750,15 @@ proto.backend.CertificationsClient.prototype.verify =
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.google.protobuf.BoolValue>}
- *     The XHR Node Readable Stream
+ *     A native promise that resolves to the response
  */
 proto.backend.CertificationsPromiseClient.prototype.verify =
     function(request, metadata) {
-  var _this = this;
-  return new Promise(function (resolve, reject) {
-    _this.delegateClient_.verify(
-      request, metadata, function (error, response) {
-        error ? reject(error) : resolve(response);
-      });
-  });
+  return this.client_.unaryCall(this.hostname_ +
+      '/backend.Certifications/Verify',
+      request,
+      metadata || {},
+      methodInfo_Certifications_Verify);
 };
 
 
