@@ -30,7 +30,12 @@ func (s *CertificationImpl) Update(ctx context.Context, in *pb.Certification) (*
 		return nil, err
 	}
 
-	certification.Status = in.Status
+	if in.Status != "" {
+		certification.Status = in.Status
+	}
+	if in.ImageData != "" {
+		certification.ImageData = in.ImageData
+	}
 	if err := biz.Update(certificationTable, in.Id, certification); err != nil {
 		return nil, err
 	}
@@ -69,7 +74,7 @@ func (s *CertificationImpl) Verify(ctx context.Context, in *pb.IDRequest) (*type
 	}
 	verified := true
 	for _, v := range certifications {
-		if v.Status != "pass" {
+		if v.Status != "通过" {
 			verified = false
 			break
 		}
