@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 	"strings"
-	"time"
 
 	"github.com/freightio/backend/internal/impl/biz"
 	pb "github.com/freightio/backend/service"
+	"github.com/gogo/protobuf/types"
 )
 
 const (
@@ -16,7 +16,8 @@ const (
 type OrderServerImpl struct{}
 
 func (s *OrderServerImpl) Add(ctx context.Context, in *pb.Order) (*pb.Order, error) {
-	in.Id = time.Now().String()
+	in.Id = types.TimestampNow().String()
+	in.Created = types.TimestampNow()
 	if err := biz.Insert(orderTable, in); err != nil {
 		return nil, err
 	}

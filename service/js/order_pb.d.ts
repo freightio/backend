@@ -47,13 +47,13 @@ export class Order extends jspb.Message {
   hasPayinfo(): boolean;
   clearPayinfo(): void;
 
-  getAnnotationsMap(): jspb.Map<string, string>;
-  clearAnnotationsMap(): void;
-
   getCreated(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setCreated(value?: google_protobuf_timestamp_pb.Timestamp): void;
   hasCreated(): boolean;
   clearCreated(): void;
+
+  getAnnotationsMap(): jspb.Map<string, string>;
+  clearAnnotationsMap(): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Order.AsObject;
@@ -76,8 +76,8 @@ export namespace Order {
     status: string,
     comment: string,
     payinfo?: PayInfo.AsObject,
-    annotationsMap: Array<[string, string]>,
     created?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    annotationsMap: Array<[string, string]>,
   }
 }
 

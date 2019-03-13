@@ -16,20 +16,20 @@ service Orders {
 }
 
 message Order {
-  string id = 1;  
+  string id = 1;
   //freight type
   string type = 2;
   Position from = 3;
   repeated Position tos = 4;
   float fee = 5;
   Sender sender = 6;
-  google.protobuf.Timestamp start = 13;
-  string driverId = 9;
-  string status = 10;
-  string comment = 11;
-  PayInfo payInfo = 12;
-  map<string,string> annotations = 7;
-  google.protobuf.Timestamp created = 8;
+  google.protobuf.Timestamp start = 7;
+  string driverId = 8;
+  string status = 9;
+  string comment = 10;
+  PayInfo payInfo = 11;
+  google.protobuf.Timestamp created = 12;
+  map<string,string> annotations = 13;  
 }
 
 message Position {
