@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	pb "github.com/freightio/backend/api/go"
+	pb "github.com/freightio/backend/api/sdk/go"
 	"github.com/freightio/backend/internal/impl/biz"
 	"github.com/gogo/protobuf/types"
 )

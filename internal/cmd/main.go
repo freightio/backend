@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/freightio/backend/api/go"
+	pb "github.com/freightio/backend/api/sdk/go"
 	impl "github.com/freightio/backend/internal/impl/service"
 	"google.golang.org/grpc"
 )
