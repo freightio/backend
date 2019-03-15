@@ -151,26 +151,6 @@ export namespace OrderRequest {
   }
 }
 
-export class OrderList extends jspb.Message {
-  getItemsList(): Array<Order>;
-  setItemsList(value: Array<Order>): void;
-  clearItemsList(): void;
-  addItems(value?: Order, index?: number): Order;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): OrderList.AsObject;
-  static toObject(includeInstance: boolean, msg: OrderList): OrderList.AsObject;
-  static serializeBinaryToWriter(message: OrderList, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): OrderList;
-  static deserializeBinaryFromReader(message: OrderList, reader: jspb.BinaryReader): OrderList;
-}
-
-export namespace OrderList {
-  export type AsObject = {
-    itemsList: Array<Order.AsObject>,
-  }
-}
-
 export class SignReply extends jspb.Message {
   getSigned(): string;
   setSigned(value: string): void;

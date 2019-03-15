@@ -43,23 +43,3 @@ export namespace Account {
   }
 }
 
-export class AccountList extends jspb.Message {
-  getItemsList(): Array<Account>;
-  setItemsList(value: Array<Account>): void;
-  clearItemsList(): void;
-  addItems(value?: Account, index?: number): Account;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): AccountList.AsObject;
-  static toObject(includeInstance: boolean, msg: AccountList): AccountList.AsObject;
-  static serializeBinaryToWriter(message: AccountList, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): AccountList;
-  static deserializeBinaryFromReader(message: AccountList, reader: jspb.BinaryReader): AccountList;
-}
-
-export namespace AccountList {
-  export type AsObject = {
-    itemsList: Array<Account.AsObject>,
-  }
-}
-

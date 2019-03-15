@@ -92,50 +92,45 @@ proto.backend.VehiclesPromiseClient =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.google.protobuf.Empty,
- *   !proto.backend.VehicleList>}
+ *   !proto.backend.Vehicle>}
  */
 const methodInfo_Vehicles_List = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.VehicleList,
+  proto.backend.Vehicle,
   /** @param {!proto.google.protobuf.Empty} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.VehicleList.deserializeBinary
+  proto.backend.Vehicle.deserializeBinary
 );
 
 
 /**
- * @param {!proto.google.protobuf.Empty} request The
- *     request proto
+ * @param {!proto.google.protobuf.Empty} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.VehicleList)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.VehicleList>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Vehicle>}
  *     The XHR Node Readable Stream
  */
 proto.backend.VehiclesClient.prototype.list =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Vehicles/List',
       request,
       metadata || {},
-      methodInfo_Vehicles_List,
-      callback);
+      methodInfo_Vehicles_List);
 };
 
 
 /**
- * @param {!proto.google.protobuf.Empty} request The
- *     request proto
+ * @param {!proto.google.protobuf.Empty} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.VehicleList>}
- *     A native promise that resolves to the response
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Vehicle>}
+ *     The XHR Node Readable Stream
  */
 proto.backend.VehiclesPromiseClient.prototype.list =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Vehicles/List',
       request,
       metadata || {},

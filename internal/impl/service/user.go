@@ -38,12 +38,19 @@ func (s *UserServerImpl) Update(ctx context.Context, in *pb.User) (*pb.User, err
 	return in, nil
 }
 
-func (s *UserServerImpl) List(ctx context.Context, in *pb.User) (*pb.UserList, error) {
+func (s *UserServerImpl) List(in *pb.User, stream pb.Users_ListServer) error {
 	users := []*pb.User{}
 	if err := biz.List(userTable, &users, "order by data->'$.created' desc"); err != nil {
-		return nil, err
+		return err
 	}
-	return &pb.UserList{Items: users}, nil
+
+	for _, v := range users {
+		if err := stream.Send(v); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (s *UserServerImpl) Delete(ctx context.Context, in *pb.IDRequest) (*pb.User, error) {

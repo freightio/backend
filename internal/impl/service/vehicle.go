@@ -1,8 +1,6 @@
 package service
 
 import (
-	"context"
-
 	pb "github.com/freightio/backend/api/sdk/go"
 	"github.com/freightio/backend/internal/impl/biz"
 	"github.com/gogo/protobuf/types"
@@ -32,10 +30,17 @@ func init() {
 
 type VehicleImpl struct{}
 
-func (s *VehicleImpl) List(ctx context.Context, in *types.Empty) (*pb.VehicleList, error) {
+func (s *VehicleImpl) List(in *types.Empty, stream pb.Vehicles_ListServer) error {
 	vehicles := []*pb.Vehicle{}
 	if err := biz.List(vehicleTable, &vehicles); err != nil {
-		return nil, err
+		return err
 	}
-	return &pb.VehicleList{Items: vehicles}, nil
+
+	for _, v := range vehicles {
+		if err := stream.Send(v); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

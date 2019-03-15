@@ -64,12 +64,19 @@ func (s *OrderServerImpl) ListByPositon(in *pb.Position, stream pb.Orders_ListBy
 	return nil
 }
 
-func (s *OrderServerImpl) ListByUser(ctx context.Context, in *pb.User) (*pb.OrderList, error) {
+func (s *OrderServerImpl) ListByUser(in *pb.User, stream pb.Orders_ListByUserServer) error {
 	orders := []*pb.Order{}
 	if err := biz.List(orderTable, &orders, "where data->'$.sender.id'='"+in.Id+"' or data->'$.driverId'='"+in.Id+"' order by data->'$.created' desc"); err != nil {
-		return nil, err
+		return err
 	}
-	return &pb.OrderList{Items: orders}, nil
+
+	for _, v := range orders {
+		if err := stream.Send(v); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (s *OrderServerImpl) Delete(ctx context.Context, in *pb.OrderRequest) (*pb.Order, error) {

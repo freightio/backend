@@ -65,26 +65,6 @@ export namespace IDRequest {
   }
 }
 
-export class UserList extends jspb.Message {
-  getItemsList(): Array<User>;
-  setItemsList(value: Array<User>): void;
-  clearItemsList(): void;
-  addItems(value?: User, index?: number): User;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): UserList.AsObject;
-  static toObject(includeInstance: boolean, msg: UserList): UserList.AsObject;
-  static serializeBinaryToWriter(message: UserList, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): UserList;
-  static deserializeBinaryFromReader(message: UserList, reader: jspb.BinaryReader): UserList;
-}
-
-export namespace UserList {
-  export type AsObject = {
-    itemsList: Array<User.AsObject>,
-  }
-}
-
 export class Certification extends jspb.Message {
   getId(): string;
   setId(value: string): void;

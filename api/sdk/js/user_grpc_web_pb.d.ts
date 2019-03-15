@@ -6,8 +6,7 @@ import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/t
 import {
   Certification,
   IDRequest,
-  User,
-  UserList} from './user_pb';
+  User} from './user_pb';
 
 export class UsersClient {
   constructor (hostname: string,
@@ -37,10 +36,8 @@ export class UsersClient {
 
   list(
     request: User,
-    metadata: grpcWeb.Metadata | undefined,
-    callback: (err: grpcWeb.Error,
-               response: UserList) => void
-  ): grpcWeb.ClientReadableStream<UserList>;
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<User>;
 
   delete(
     request: IDRequest,
@@ -121,7 +118,7 @@ export class UsersPromiseClient {
   list(
     request: User,
     metadata?: grpcWeb.Metadata
-  ): Promise<UserList>;
+  ): grpcWeb.ClientReadableStream<User>;
 
   delete(
     request: IDRequest,

@@ -149,50 +149,45 @@ proto.backend.WalletsPromiseClient.prototype.add =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.backend.User,
- *   !proto.backend.AccountList>}
+ *   !proto.backend.Account>}
  */
 const methodInfo_Wallets_List = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.AccountList,
+  proto.backend.Account,
   /** @param {!proto.backend.User} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.AccountList.deserializeBinary
+  proto.backend.Account.deserializeBinary
 );
 
 
 /**
- * @param {!proto.backend.User} request The
- *     request proto
+ * @param {!proto.backend.User} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.AccountList)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.AccountList>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Account>}
  *     The XHR Node Readable Stream
  */
 proto.backend.WalletsClient.prototype.list =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Wallets/List',
       request,
       metadata || {},
-      methodInfo_Wallets_List,
-      callback);
+      methodInfo_Wallets_List);
 };
 
 
 /**
- * @param {!proto.backend.User} request The
- *     request proto
+ * @param {!proto.backend.User} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.AccountList>}
- *     A native promise that resolves to the response
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Account>}
+ *     The XHR Node Readable Stream
  */
 proto.backend.WalletsPromiseClient.prototype.list =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Wallets/List',
       request,
       metadata || {},

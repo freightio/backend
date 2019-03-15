@@ -11,7 +11,7 @@ service Orders {
   rpc Update (Order) returns (Order) {}
   rpc Delete (OrderRequest) returns (Order) {}
   rpc ListByPositon (Position) returns (stream Order) {}
-  rpc ListByUser (User) returns (OrderList) {}  
+  rpc ListByUser (User) returns (stream Order) {}  
   rpc SignAlipay (Order) returns (SignReply) {} //fee required
 }
 
@@ -46,10 +46,6 @@ message Sender {
 
 message OrderRequest {
   string id = 1;
-}
-
-message OrderList {
-  repeated Order items = 1;
 }
 
 message SignReply {

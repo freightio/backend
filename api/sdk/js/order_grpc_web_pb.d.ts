@@ -5,7 +5,6 @@ import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/t
 
 import {
   Order,
-  OrderList,
   OrderRequest,
   Position,
   SignReply} from './order_pb';
@@ -50,10 +49,8 @@ export class OrdersClient {
 
   listByUser(
     request: user_pb.User,
-    metadata: grpcWeb.Metadata | undefined,
-    callback: (err: grpcWeb.Error,
-               response: OrderList) => void
-  ): grpcWeb.ClientReadableStream<OrderList>;
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<Order>;
 
   signAlipay(
     request: Order,
@@ -97,7 +94,7 @@ export class OrdersPromiseClient {
   listByUser(
     request: user_pb.User,
     metadata?: grpcWeb.Metadata
-  ): Promise<OrderList>;
+  ): grpcWeb.ClientReadableStream<Order>;
 
   signAlipay(
     request: Order,

@@ -7,7 +7,7 @@ package backend;
 
 service Wallets {
   rpc Add(Account) returns (Account) {}  
-  rpc List(User) returns (AccountList) {}
+  rpc List(User) returns (stream Account) {}
   rpc Total(Account) returns (Account) {}
 }
 
@@ -18,8 +18,4 @@ message Account {
   string orderId = 4;
   google.protobuf.Timestamp created = 5;
   map<string,string> annotations = 6;  
-}
-
-message AccountList {
-  repeated Account items= 1;
 }

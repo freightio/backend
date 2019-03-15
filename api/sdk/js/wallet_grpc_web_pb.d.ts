@@ -3,9 +3,7 @@ import * as grpcWeb from 'grpc-web';
 import * as user_pb from './user_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
-import {
-  Account,
-  AccountList} from './wallet_pb';
+import {Account} from './wallet_pb';
 
 export class WalletsClient {
   constructor (hostname: string,
@@ -21,10 +19,8 @@ export class WalletsClient {
 
   list(
     request: user_pb.User,
-    metadata: grpcWeb.Metadata | undefined,
-    callback: (err: grpcWeb.Error,
-               response: AccountList) => void
-  ): grpcWeb.ClientReadableStream<AccountList>;
+    metadata?: grpcWeb.Metadata
+  ): grpcWeb.ClientReadableStream<Account>;
 
   total(
     request: Account,
@@ -48,7 +44,7 @@ export class WalletsPromiseClient {
   list(
     request: user_pb.User,
     metadata?: grpcWeb.Metadata
-  ): Promise<AccountList>;
+  ): grpcWeb.ClientReadableStream<Account>;
 
   total(
     request: Account,

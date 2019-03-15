@@ -259,50 +259,45 @@ proto.backend.UsersPromiseClient.prototype.update =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.backend.User,
- *   !proto.backend.UserList>}
+ *   !proto.backend.User>}
  */
 const methodInfo_Users_List = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.UserList,
+  proto.backend.User,
   /** @param {!proto.backend.User} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.UserList.deserializeBinary
+  proto.backend.User.deserializeBinary
 );
 
 
 /**
- * @param {!proto.backend.User} request The
- *     request proto
+ * @param {!proto.backend.User} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.UserList)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.UserList>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.User>}
  *     The XHR Node Readable Stream
  */
 proto.backend.UsersClient.prototype.list =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Users/List',
       request,
       metadata || {},
-      methodInfo_Users_List,
-      callback);
+      methodInfo_Users_List);
 };
 
 
 /**
- * @param {!proto.backend.User} request The
- *     request proto
+ * @param {!proto.backend.User} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.UserList>}
- *     A native promise that resolves to the response
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.User>}
+ *     The XHR Node Readable Stream
  */
 proto.backend.UsersPromiseClient.prototype.list =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Users/List',
       request,
       metadata || {},

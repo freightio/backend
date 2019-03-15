@@ -10,7 +10,7 @@ service Users {
   rpc Add (User) returns (User) {}
   rpc Get (IDRequest) returns (User) {}
   rpc Update (User) returns (User) {}
-  rpc List (User) returns (UserList) {}
+  rpc List (User) returns (stream User) {}
   rpc Delete (IDRequest) returns (User) {}
   rpc Login (User) returns (User) {}
   rpc Sign (User) returns (User) {}
@@ -36,10 +36,6 @@ message User {
 
 message IDRequest {
   string id = 1;
-}
-
-message UserList {
-  repeated User items = 1;
 }
 
 message Certification {

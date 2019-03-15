@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 package backend;
 
 service Vehicles {
-  rpc List (google.protobuf.Empty) returns (VehicleList) {}
+  rpc List (google.protobuf.Empty) returns (stream Vehicle) {}
 }
 
 message Vehicle {
@@ -27,8 +27,4 @@ message Price {
 message Start {
   int32 distance = 1;
   float fee = 2;
-}
-
-message VehicleList {
-  repeated Vehicle items = 1;
 }

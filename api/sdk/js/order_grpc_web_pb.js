@@ -364,50 +364,45 @@ proto.backend.OrdersPromiseClient.prototype.listByPositon =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.backend.User,
- *   !proto.backend.OrderList>}
+ *   !proto.backend.Order>}
  */
 const methodInfo_Orders_ListByUser = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.OrderList,
+  proto.backend.Order,
   /** @param {!proto.backend.User} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.OrderList.deserializeBinary
+  proto.backend.Order.deserializeBinary
 );
 
 
 /**
- * @param {!proto.backend.User} request The
- *     request proto
+ * @param {!proto.backend.User} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.OrderList)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.OrderList>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Order>}
  *     The XHR Node Readable Stream
  */
 proto.backend.OrdersClient.prototype.listByUser =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Orders/ListByUser',
       request,
       metadata || {},
-      methodInfo_Orders_ListByUser,
-      callback);
+      methodInfo_Orders_ListByUser);
 };
 
 
 /**
- * @param {!proto.backend.User} request The
- *     request proto
+ * @param {!proto.backend.User} request The request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.OrderList>}
- *     A native promise that resolves to the response
+ * @return {!grpc.web.ClientReadableStream<!proto.backend.Order>}
+ *     The XHR Node Readable Stream
  */
 proto.backend.OrdersPromiseClient.prototype.listByUser =
     function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
+  return this.client_.serverStreaming(this.hostname_ +
       '/backend.Orders/ListByUser',
       request,
       metadata || {},

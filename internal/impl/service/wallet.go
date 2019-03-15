@@ -37,10 +37,16 @@ func (s *WalletServerImpl) Total(ctx context.Context, in *pb.Account) (*pb.Accou
 	return in, nil
 }
 
-func (s *WalletServerImpl) List(ctx context.Context, in *pb.User) (*pb.AccountList, error) {
+func (s *WalletServerImpl) List(in *pb.User, stream pb.Wallets_ListServer) error {
 	accounts := []*pb.Account{}
 	if err := biz.List(walletTable, &accounts, "order by data->'$.created' desc"); err != nil {
-		return nil, err
+		return err
 	}
-	return &pb.AccountList{Items: accounts}, nil
+
+	for _, v := range accounts {
+		if err := stream.Send(v); err != nil {
+			return err
+		}
+	}
+	return nil
 }

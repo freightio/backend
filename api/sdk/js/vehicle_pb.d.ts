@@ -92,23 +92,3 @@ export namespace Start {
   }
 }
 
-export class VehicleList extends jspb.Message {
-  getItemsList(): Array<Vehicle>;
-  setItemsList(value: Array<Vehicle>): void;
-  clearItemsList(): void;
-  addItems(value?: Vehicle, index?: number): Vehicle;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): VehicleList.AsObject;
-  static toObject(includeInstance: boolean, msg: VehicleList): VehicleList.AsObject;
-  static serializeBinaryToWriter(message: VehicleList, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): VehicleList;
-  static deserializeBinaryFromReader(message: VehicleList, reader: jspb.BinaryReader): VehicleList;
-}
-
-export namespace VehicleList {
-  export type AsObject = {
-    itemsList: Array<Vehicle.AsObject>,
-  }
-}
-
