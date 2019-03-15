@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
+	pb "github.com/freightio/backend/api/go"
 	"github.com/freightio/backend/internal/impl/biz"
-	pb "github.com/freightio/backend/service"
 	"github.com/gogo/protobuf/types"
 )
 
