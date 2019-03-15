@@ -34,16 +34,16 @@ generate-go:
 	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/empty.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,\
-	plugins=grpc:./api/go api/*.proto
-	@$(SED) -i '/google\/api/d' api/go/*.pb.go
+	plugins=grpc:./api/sdk/go api/*.proto
+	@$(SED) -i '/google\/api/d' api/sdk/go/*.pb.go
 	@echo Generate-go successfully.
 
 generate-js:
-	@-mkdir api/js > /dev/null 2>&1  || true
+	@-mkdir api/sdk/js > /dev/null 2>&1  || true
 	@protoc -I${GOPATH}/src -I./api api/*.proto \
-	--js_out=import_style=commonjs:api/js \
-	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:api/js
-	cp -rf api/js/* ../client/src/api
+	--js_out=import_style=commonjs:api/sdk/js \
+	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:api/sdk/js
+	cp -rf api/sdk/js/* ../client/src/sdk
 	@echo Generate-js successfully.
 
 build:#prepare generate-go
