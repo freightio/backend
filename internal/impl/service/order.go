@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	pb "github.com/freightio/backend/api/sdk/go"
 	"github.com/freightio/backend/internal/impl/biz"
+	pb "github.com/freightio/backend/service/sdk/go"
 	"github.com/gogo/protobuf/types"
 )
 
@@ -86,10 +86,10 @@ func (s *OrderServerImpl) Delete(ctx context.Context, in *pb.OrderRequest) (*pb.
 	return &pb.Order{}, nil
 }
 
-func (s *OrderServerImpl) SignAlipay(ctx context.Context, in *pb.Order) (*pb.SignReply, error) {
+func (s *OrderServerImpl) SignAlipay(ctx context.Context, in *pb.Order) (*types.StringValue, error) {
 	v, err := biz.SignAlipay(in.Fee)
 	if err != nil {
 		return nil, err
 	}
-	return &pb.SignReply{Signed: v}, nil
+	return &types.StringValue{Value: v}, nil
 }

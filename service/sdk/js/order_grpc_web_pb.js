@@ -14,6 +14,8 @@ grpc.web = require('grpc-web');
 
 var user_pb = require('./user_pb.js')
 
+var google_protobuf_wrappers_pb = require('google-protobuf/google/protobuf/wrappers_pb.js')
+
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
 proto.backend = require('./order_pb.js');
@@ -414,15 +416,15 @@ proto.backend.OrdersPromiseClient.prototype.listByUser =
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.backend.Order,
- *   !proto.backend.SignReply>}
+ *   !proto.google.protobuf.StringValue>}
  */
 const methodInfo_Orders_SignAlipay = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.backend.SignReply,
+  google_protobuf_wrappers_pb.StringValue,
   /** @param {!proto.backend.Order} request */
   function(request) {
     return request.serializeBinary();
   },
-  proto.backend.SignReply.deserializeBinary
+  google_protobuf_wrappers_pb.StringValue.deserializeBinary
 );
 
 
@@ -431,9 +433,9 @@ const methodInfo_Orders_SignAlipay = new grpc.web.AbstractClientBase.MethodInfo(
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.backend.SignReply)}
+ * @param {function(?grpc.web.Error, ?proto.google.protobuf.StringValue)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.backend.SignReply>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.google.protobuf.StringValue>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.backend.OrdersClient.prototype.signAlipay =
@@ -452,7 +454,7 @@ proto.backend.OrdersClient.prototype.signAlipay =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.backend.SignReply>}
+ * @return {!Promise<!proto.google.protobuf.StringValue>}
  *     A native promise that resolves to the response
  */
 proto.backend.OrdersPromiseClient.prototype.signAlipay =

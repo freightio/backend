@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "user.proto";
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
 package backend;
@@ -12,7 +13,7 @@ service Orders {
   rpc Delete (OrderRequest) returns (Order) {}
   rpc ListByPositon (Position) returns (stream Order) {}
   rpc ListByUser (User) returns (stream Order) {}  
-  rpc SignAlipay (Order) returns (SignReply) {} //fee required
+  rpc SignAlipay (Order) returns (google.protobuf.StringValue) {} //fee required
 }
 
 message Order {
@@ -46,10 +47,6 @@ message Sender {
 
 message OrderRequest {
   string id = 1;
-}
-
-message SignReply {
-  string signed = 1;
 }
 
 message PayInfo {

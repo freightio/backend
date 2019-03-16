@@ -1,6 +1,7 @@
 import * as jspb from "google-protobuf"
 
 import * as user_pb from './user_pb';
+import * as google_protobuf_wrappers_pb from 'google-protobuf/google/protobuf/wrappers_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 export class Order extends jspb.Message {
@@ -148,24 +149,6 @@ export class OrderRequest extends jspb.Message {
 export namespace OrderRequest {
   export type AsObject = {
     id: string,
-  }
-}
-
-export class SignReply extends jspb.Message {
-  getSigned(): string;
-  setSigned(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): SignReply.AsObject;
-  static toObject(includeInstance: boolean, msg: SignReply): SignReply.AsObject;
-  static serializeBinaryToWriter(message: SignReply, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): SignReply;
-  static deserializeBinaryFromReader(message: SignReply, reader: jspb.BinaryReader): SignReply;
-}
-
-export namespace SignReply {
-  export type AsObject = {
-    signed: string,
   }
 }
 

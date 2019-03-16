@@ -26,24 +26,23 @@ prepare:
 generate:generate-js generate-go
 
 generate-go:
-	@protoc -I${GOPATH}/src -I./api \
-	--gogofaster_out=\
+	@protoc -I./service --gogofaster_out=\
 	Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/empty.proto=github.com/gogo/protobuf/types,\
 	Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types,\
-	plugins=grpc:./api/sdk/go api/*.proto
-	@$(SED) -i '/google\/api/d' api/sdk/go/*.pb.go
+	plugins=grpc:./service/sdk/go service/*.proto
+	@$(SED) -i '/google\/api/d' service/sdk/go/*.pb.go
 	@echo Generate-go successfully.
 
 generate-js:
-	@-mkdir api/sdk/js > /dev/null 2>&1  || true
-	@protoc -I${GOPATH}/src -I./api api/*.proto \
-	--js_out=import_style=commonjs:api/sdk/js \
-	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:api/sdk/js
-	cp -rf api/sdk/js/* ../client/src/sdk
+	@-mkdir service/sdk/js > /dev/null 2>&1  || true
+	@protoc -I./service service/*.proto \
+	--js_out=import_style=commonjs:service/sdk/js \
+	--grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:service/sdk/js
+	cp -rf service/sdk/js/* ../client/src/sdk
 	@echo Generate-js successfully.
 
 build:#prepare generate-go

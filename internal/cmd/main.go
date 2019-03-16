@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/freightio/backend/api/sdk/go"
 	impl "github.com/freightio/backend/internal/impl/service"
+	pb "github.com/freightio/backend/service/sdk/go"
 	"google.golang.org/grpc"
 )
 

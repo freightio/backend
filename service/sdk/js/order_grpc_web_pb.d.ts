@@ -1,13 +1,13 @@
 import * as grpcWeb from 'grpc-web';
 
 import * as user_pb from './user_pb';
+import * as google_protobuf_wrappers_pb from 'google-protobuf/google/protobuf/wrappers_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 
 import {
   Order,
   OrderRequest,
-  Position,
-  SignReply} from './order_pb';
+  Position} from './order_pb';
 
 export class OrdersClient {
   constructor (hostname: string,
@@ -56,8 +56,8 @@ export class OrdersClient {
     request: Order,
     metadata: grpcWeb.Metadata | undefined,
     callback: (err: grpcWeb.Error,
-               response: SignReply) => void
-  ): grpcWeb.ClientReadableStream<SignReply>;
+               response: google_protobuf_wrappers_pb.StringValue) => void
+  ): grpcWeb.ClientReadableStream<google_protobuf_wrappers_pb.StringValue>;
 
 }
 
@@ -99,7 +99,7 @@ export class OrdersPromiseClient {
   signAlipay(
     request: Order,
     metadata?: grpcWeb.Metadata
-  ): Promise<SignReply>;
+  ): Promise<google_protobuf_wrappers_pb.StringValue>;
 
 }
 
