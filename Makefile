@@ -58,13 +58,6 @@ run:image
 	@-docker service rm $(SERVICE) > /dev/null 2>&1  || true	
 	@docker service create --name $(SERVICE) --network devel $(IMG_HUB)/$(SERVICE):$(TAG)
 
-envoy:
-	docker build -t $(IMG_HUB)/envoy:$(TAG) -f envoy.Dockerfile .
-	docker service create --name envoy --network devel -p 8080:8080 $(IMG_HUB)/envoy:$(TAG)
-
-mysql:
-	-docker service create --name mysql --network devel --mount type=bind,source=/home/daniel/.mysqldata,destination=/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=freight mysql:5.7.24
-
 test:
 	go test -cover ./...
 
